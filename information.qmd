@@ -1,0 +1,37 @@
+---
+title: "Bond Details"
+---
+
+| Name    | Description               | Rate     | Maturity   | Currency |
+|---------|---------------------------|----------|------------|----------|
+| R_186   | Fixed Long-term           | 10.5%    | 2026       | ZAR      |
+| R_2023  | Fixed Medium-term         | 7%       | 2023       | ZAR      |
+| R_2030  | Fixed Long-term           | 8.75%    | 2030       | ZAR      |
+| R_2032  | Fixed Long-term           | 9%       | 2032       | ZAR      |
+| R_2033  | Fixed Long-term           | 9.5%     | 2033       | ZAR      |
+| R_2035  | Fixed Long-term           | 10%      | 2035       | ZAR      |
+| R_2037  | Fixed Long-term           | 10.25%   | 2037       | ZAR      |
+| R_2038  | Fixed Long-term           | 10.5%    | 2038       | ZAR      |
+| R_204   | Fixed Long-term           | 10.75%   | 2040       | ZAR      |
+| R_2040  | Fixed Long-term           | 10.75%   | 2040       | ZAR      |
+| R_2044  | Fixed Long-term           | 11%      | 2044       | ZAR      |
+| R_2048  | Fixed Long-term           | 11.25%   | 2048       | ZAR      |
+| R_2053  | Fixed Long-term           | 11.5%    | 2053       | ZAR      |
+| R_207   | Fixed Medium-term         | 8%       | 2027       | ZAR      |
+| R_208   | Fixed Medium-term         | 8.25%    | 2028       | ZAR      |
+| R_209   | Fixed Medium-term         | 8.5%     | 2029       | ZAR      |
+| R_213   | Fixed Medium-term         | 7.5%     | 2023       | ZAR      |
+| R_214   | Fixed Medium-term         | 7.75%    | 2024       | ZAR      |
+| REPO    | Short-term Repo Agreement | Variable | Short-term | ZAR      |
+| SATB12M | Short-term Bond           | Variable | 12 months  | ZAR      |
+| SATB3M  | Short-term Bond           | Variable | 3 months   | ZAR      |
+| SATB6M  | Short-term Bond           | Variable | 6 months   | ZAR      |
+| SATB9M  | Short-term Bond           | Variable | 9 months   | ZAR      |
+| ZARGB10 | Long-term Bond            | Variable | 10 years   | ZAR      |
+| ZARGB15 | Long-term Bond            | Variable | 15 years   | ZAR      |
+| ZARGB2  | Short-term Bond           | Variable | 2 years    | ZAR      |
+| ZARGB20 | Long-term Bond            | Variable | 20 years   | ZAR      |
+| ZARGB25 | Long-term Bond            | Variable | 25 years   | ZAR      |
+| ZARGB3  | Medium-term Bond          | Variable | 3 years    | ZAR      |
+| ZARGB30 | Long-term Bond            | Variable | 30 years   | ZAR      |
+| ZARGB5  | Medium-term Bond          | Variable | 5 years    | ZAR      |

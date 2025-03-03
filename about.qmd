@@ -1,0 +1,53 @@
+---
+title: ""
+about:
+  template: marquee
+  links:
+    - icon: envelope
+      text: Email
+      href: mailto:bondaleanalytics@gmail.com
+    - icon: twitter
+      text: Twitter
+      href: https://x.com/BondaleYield
+    - icon: github
+      text: Github
+      href: https://github.com/kudzitsunga
+---
+
+## **What We Do**
+
+**Bondale Analytics** is a premier data analytics and research platform focused on **South Africa’s bond and yield markets**. Our mission is to transform complex financial data into **actionable insights**, supporting investors, policymakers, and researchers in making informed decisions.
+
+We specialise in:
+
+### 📊 **Market Research & Analysis**
+
+-   In-depth studies on bond market behavior, yield curve movements, and liquidity trends
+
+-   Academic and institutional research on South Africa’s debt markets and economic indicators
+
+-   Impact assessment of fiscal and monetary policy on bond pricing and investor sentiment
+
+### 📰 **Expert Commentary & Insights**
+
+-   Weekly analysis of **market developments**, including key drivers of bond yields
+
+-   **Strategic outlooks** for investors and institutions based on economic and policy shifts
+
+-   Data-backed insights to support risk management and financial decision-making
+
+### 📈 **Data Analytics & Visualisation**
+
+-   Interactive **dashboards** tracking bond market trends and economic conditions
+
+-   AI-powered **text analytics** on financial reports, monetary policy statements, and market news
+
+-   Advanced **forecasting models** to anticipate market shifts
+
+## **Our Commitment**
+
+At **Bondale Analytics**, we bridge the gap between **raw financial data and strategic insights**, equipping stakeholders with powerful tools to navigate the evolving bond market landscape. Whether you need **real-time analytics**, **custom research**, or **expert commentary**, our platform delivers **data-driven intelligence** for a competitive edge.
+
+------------------------------------------------------------------------
+
+### **Get in Touch ↓**

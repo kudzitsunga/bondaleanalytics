@@ -1,0 +1,57 @@
+---
+title: "Advanced Analytics on South Africa's Treasury Market"
+page-layout: full
+about:
+  template: marquee
+  links:
+    - icon: envelope
+      text: Email
+      href: mailto:bondaleanalytics@gmail.com  
+    - icon: twitter
+      text: Twitter
+      href: https://x.com/BondaleYield
+    - icon: github
+      text: Github
+      href: https://github.com/kudzitsunga
+---
+
+Bondale Analytics provides cutting-edge research, expert commentary, and advanced analytics on South Africa’s bond market. Our interactive dashboards offer simple, yet, powerful insights into market movements, yield behaviour, and economic trends—empowering investors, policymakers, and researchers with data-driven decision-making tools.
+
+## Key Outputs
+
+------------------------------------------------------------------------
+
+|  |  |  |
+|:----------------------:|:----------------------:|:----------------------:|
+| [![](images/dashboard-monitor.png){width="160"}](dashboard.qmd) | [![](images/research-arrows-circle.png){width="160"}](treasury.qmd) | [![](comment.png){width="160"}](commentary.qmd) |
+| Bond Market Dashboard | Treasury Market Analytics | Expert Commentary |
+
+------------------------------------------------------------------------
+
+## **🔍 Research**
+
+-   In-depth analysis of bond yields, market dynamics, and liquidity trends
+
+-   Academic research support on fixed-income markets and economic policies
+
+-   Data-driven insights into fiscal and monetary policy impacts
+
+## **📊 Commentary**
+
+-   Weekly expert reviews on bond market developments
+
+-   Actionable intelligence for investment and risk management
+
+-   Economic trends and strategic outlooks for market participants
+
+## **📈 Analytics**
+
+-   Interactive dashboards visualising yield movements and volatility
+
+-   AI-powered text analytics for financial reports and policy statements
+
+-   Advanced quantitative models for forecasting market behaviour
+
+------------------------------------------------------------------------
+
+[**Get in touch ↓**](mailto:bondaleanalytics@gmail.com)

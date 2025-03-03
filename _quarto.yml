@@ -1,0 +1,37 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Bondale Analytics"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+        
+      - href: commentary.qmd
+        text: Commentary  
+
+      - href: dashboard.qmd
+        text: Bond Dashboard 
+        
+      - href: treasury.qmd
+        text: Treasury Market
+        
+      - href: information.qmd
+        text: Bond Info        
+
+    right:
+      - href: about.qmd
+        text: About Us
+      - icon: twitter
+        href: https://x.com/BondaleYield
+        aria-label: "Twitter"
+      
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual

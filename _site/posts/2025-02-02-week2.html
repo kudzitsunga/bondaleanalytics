@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Kudzanai Tsunga">
+<meta name="dcterms.date" content="2025-02-02">
+
+<title>Treasury Yields – Bondale</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="../site_libs/proj4js-2.3.15/proj4.js"></script>
+<link href="../site_libs/highcharts-9.3.1/css/motion.css" rel="stylesheet">
+<script src="../site_libs/highcharts-9.3.1/highcharts.js"></script>
+<script src="../site_libs/highcharts-9.3.1/highcharts-3d.js"></script>
+<script src="../site_libs/highcharts-9.3.1/highcharts-more.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/stock.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/map.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/data.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/exporting.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/offline-exporting.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/drilldown.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/item-series.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/overlapping-datalabels.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/annotations.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/export-data.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/funnel.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/heatmap.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/treemap.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/sankey.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/dependency-wheel.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/organization.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/solid-gauge.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/streamgraph.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/sunburst.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/vector.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/wordcloud.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/xrange.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/tilemap.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/venn.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/gantt.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/timeline.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/parallel-coordinates.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/bullet.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/coloraxis.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/dumbbell.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/lollipop.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/series-label.js"></script>
+<script src="../site_libs/highcharts-9.3.1/plugins/motion.js"></script>
+<script src="../site_libs/highcharts-9.3.1/custom/reset.js"></script>
+<script src="../site_libs/highcharts-9.3.1/modules/boost.js"></script>
+<script src="../site_libs/highchart-binding-0.9.4/highchart.js"></script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Bondale</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../commentary.html"> 
+<span class="menu-text">Commentary</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../dashboard.html"> 
+<span class="menu-text">Bond Dashboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../treasury.html"> 
+<span class="menu-text">Treasury Tracker</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://x.com/kudzitsunga"> <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Treasury Yields</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Finance</div>
+    <div class="quarto-category">Economics</div>
+    <div class="quarto-category">Treasury</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Kudzanai Tsunga </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 2, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This week saw divergent trends in South African bond yields, with higher-yielding instruments experiencing modest declines, while lower-yielding bonds saw mixed movements. The R_186 bond, a key benchmark, remained stable at 8.34%, reflecting limited movement in shorter-term sovereign yields. However, some long-dated instruments such as R_2048 (-0.61%) and R_2053 (-0.53%) saw notable decreases, possibly indicating increased demand for longer-duration assets.</p>
+<p>Most Volatile Instruments:</p>
+<p>Short-term treasury bills (SATB3M, SATB6M, SATB9M) were the most volatile this week, with yields dropping sharply by 4.17%, 3.83%, and 1.68%, respectively. The repo rate fell significantly (-3.23%), hinting at expectations of potential easing in borrowing costs. These movements suggest that investors are positioning for a lower interest rate environment.</p>
+<p>Contrasting Yield Movements:</p>
+<p>Lower-yielding bonds, such as R_2023 (7.55%), saw limited movement, while higher-yielding long-dated bonds like R_214 (11.18%) experienced more pronounced shifts. The ZAR Government Bonds (ZARGB) series also saw yield declines, reinforcing a possible market rebalancing toward risk-adjusted returns.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-d7a90e40a9b7ce9c4e4e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-d7a90e40a9b7ce9c4e4e">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Treasury Bond Discount Rates"},"yAxis":{"title":{"text":"Discount Rate"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"group":"group","data":[{"Treasury.Bond":"T91_day","Auction.Date":"2024-01-08","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":2484,"Weighted.Average.Discount.Rate":8.486000000000001,"Weighted.Average.Effective.Yield":8.669,"Best.Allotted.Rate":8.303000000000001,"Worst.Allotted.Rate":8.584,"Worst.Bid.Rate":16.65,"Bid.to.Cover.Ratio":1.656,"x":1704672000000,"y":8.486000000000001},{"Treasury.Bond":"T91_day","Auction.Date":"2024-01-15","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4310,"Weighted.Average.Discount.Rate":8.465,"Weighted.Average.Effective.Yield":8.648,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.503,"Worst.Bid.Rate":8.784000000000001,"Bid.to.Cover.Ratio":2.873333333,"x":1705276800000,"y":8.465},{"Treasury.Bond":"T91_day","Auction.Date":"2024-01-22","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3255,"Weighted.Average.Discount.Rate":8.512,"Weighted.Average.Effective.Yield":8.699999999999999,"Best.Allotted.Rate":8.462999999999999,"Worst.Allotted.Rate":8.563000000000001,"Worst.Bid.Rate":8.784000000000001,"Bid.to.Cover.Ratio":2.17,"x":1705881600000,"y":8.512},{"Treasury.Bond":"T91_day","Auction.Date":"2024-01-29","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":6662,"Weighted.Average.Discount.Rate":8.49,"Weighted.Average.Effective.Yield":8.68,"Best.Allotted.Rate":8.332000000000001,"Worst.Allotted.Rate":8.51,"Worst.Bid.Rate":8.907,"Bid.to.Cover.Ratio":4.441333333,"x":1706486400000,"y":8.49},{"Treasury.Bond":"T91_day","Auction.Date":"2024-02-05","Amount.on.Offer":1000,"Total.Amount.Allocated":1000,"Total.Amount.of.Bids.Received":4020,"Weighted.Average.Discount.Rate":8.435,"Weighted.Average.Effective.Yield":8.619999999999999,"Best.Allotted.Rate":8.382999999999999,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.804,"Bid.to.Cover.Ratio":4.02,"x":1707091200000,"y":8.435},{"Treasury.Bond":"T91_day","Auction.Date":"2024-02-12","Amount.on.Offer":1000,"Total.Amount.Allocated":1000,"Total.Amount.of.Bids.Received":3491,"Weighted.Average.Discount.Rate":8.475,"Weighted.Average.Effective.Yield":8.66,"Best.Allotted.Rate":8.403,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.763999999999999,"Bid.to.Cover.Ratio":3.491,"x":1707696000000,"y":8.475},{"Treasury.Bond":"T91_day","Auction.Date":"2024-02-19","Amount.on.Offer":1000,"Total.Amount.Allocated":1000,"Total.Amount.of.Bids.Received":3727,"Weighted.Average.Discount.Rate":8.435,"Weighted.Average.Effective.Yield":8.619999999999999,"Best.Allotted.Rate":8.323,"Worst.Allotted.Rate":8.503,"Worst.Bid.Rate":8.704000000000001,"Bid.to.Cover.Ratio":3.727,"x":1708300800000,"y":8.435},{"Treasury.Bond":"T91_day","Auction.Date":"2024-02-26","Amount.on.Offer":1000,"Total.Amount.Allocated":1000,"Total.Amount.of.Bids.Received":3543,"Weighted.Average.Discount.Rate":8.468999999999999,"Weighted.Average.Effective.Yield":8.65,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.683999999999999,"Bid.to.Cover.Ratio":3.543,"x":1708905600000,"y":8.468999999999999},{"Treasury.Bond":"T91_day","Auction.Date":"2024-03-04","Amount.on.Offer":1000,"Total.Amount.Allocated":1000,"Total.Amount.of.Bids.Received":4085,"Weighted.Average.Discount.Rate":8.430999999999999,"Weighted.Average.Effective.Yield":8.609999999999999,"Best.Allotted.Rate":8.343,"Worst.Allotted.Rate":8.503,"Worst.Bid.Rate":8.704000000000001,"Bid.to.Cover.Ratio":4.085,"x":1709510400000,"y":8.430999999999999},{"Treasury.Bond":"T91_day","Auction.Date":"2024-03-11","Amount.on.Offer":1000,"Total.Amount.Allocated":1000,"Total.Amount.of.Bids.Received":3240,"Weighted.Average.Discount.Rate":8.487,"Weighted.Average.Effective.Yield":8.67,"Best.Allotted.Rate":8.382999999999999,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.624000000000001,"Bid.to.Cover.Ratio":3.24,"x":1710115200000,"y":8.487},{"Treasury.Bond":"T91_day","Auction.Date":"2024-03-18","Amount.on.Offer":1000,"Total.Amount.Allocated":1000,"Total.Amount.of.Bids.Received":5237,"Weighted.Average.Discount.Rate":8.435,"Weighted.Average.Effective.Yield":8.619999999999999,"Best.Allotted.Rate":8.403,"Worst.Allotted.Rate":8.443,"Worst.Bid.Rate":8.824,"Bid.to.Cover.Ratio":5.237,"x":1710720000000,"y":8.435},{"Treasury.Bond":"T91_day","Auction.Date":"2024-03-25","Amount.on.Offer":1000,"Total.Amount.Allocated":1000,"Total.Amount.of.Bids.Received":2993,"Weighted.Average.Discount.Rate":8.398999999999999,"Weighted.Average.Effective.Yield":8.85,"Best.Allotted.Rate":8.343,"Worst.Allotted.Rate":8.443,"Worst.Bid.Rate":8.624000000000001,"Bid.to.Cover.Ratio":2.993,"x":1711324800000,"y":8.398999999999999},{"Treasury.Bond":"T91_day","Auction.Date":"2024-03-28","Amount.on.Offer":1500,"Total.Amount.Allocated":390,"Total.Amount.of.Bids.Received":940,"Weighted.Average.Discount.Rate":8.476000000000001,"Weighted.Average.Effective.Yield":8.66,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.664,"Bid.to.Cover.Ratio":2.41025641,"x":1711584000000,"y":8.476000000000001},{"Treasury.Bond":"T91_day","Auction.Date":"2024-04-08","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4956,"Weighted.Average.Discount.Rate":8.449,"Weighted.Average.Effective.Yield":8.630527016,"Best.Allotted.Rate":8.382999999999999,"Worst.Allotted.Rate":8.503,"Worst.Bid.Rate":8.704000000000001,"Bid.to.Cover.Ratio":3.304,"x":1712534400000,"y":8.449},{"Treasury.Bond":"T91_day","Auction.Date":"2024-04-15","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":5805,"Weighted.Average.Discount.Rate":8.391999999999999,"Weighted.Average.Effective.Yield":8.571526574,"Best.Allotted.Rate":8.382999999999999,"Worst.Allotted.Rate":8.403,"Worst.Bid.Rate":8.724,"Bid.to.Cover.Ratio":3.87,"x":1713139200000,"y":8.391999999999999},{"Treasury.Bond":"T91_day","Auction.Date":"2024-04-22","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3679,"Weighted.Average.Discount.Rate":8.384,"Weighted.Average.Effective.Yield":8.563319609000001,"Best.Allotted.Rate":8.323,"Worst.Allotted.Rate":8.563000000000001,"Worst.Bid.Rate":8.724,"Bid.to.Cover.Ratio":2.452666667,"x":1713744000000,"y":8.384},{"Treasury.Bond":"T91_day","Auction.Date":"2024-04-29","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3823,"Weighted.Average.Discount.Rate":8.523,"Weighted.Average.Effective.Yield":8.706067024999999,"Best.Allotted.Rate":8.212999999999999,"Worst.Allotted.Rate":8.618,"Worst.Bid.Rate":8.718999999999999,"Bid.to.Cover.Ratio":2.548666667,"x":1714348800000,"y":8.523},{"Treasury.Bond":"T91_day","Auction.Date":"2024-05-06","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3603,"Weighted.Average.Discount.Rate":8.476000000000001,"Weighted.Average.Effective.Yield":8.65899847,"Best.Allotted.Rate":8.403,"Worst.Allotted.Rate":8.563000000000001,"Worst.Bid.Rate":8.864000000000001,"Bid.to.Cover.Ratio":2.402,"x":1714953600000,"y":8.476000000000001},{"Treasury.Bond":"T91_day","Auction.Date":"2024-05-13","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3375,"Weighted.Average.Discount.Rate":8.568,"Weighted.Average.Effective.Yield":8.754565682999999,"Best.Allotted.Rate":8.462999999999999,"Worst.Allotted.Rate":8.644,"Worst.Bid.Rate":8.744,"Bid.to.Cover.Ratio":2.25,"x":1715558400000,"y":8.568},{"Treasury.Bond":"T91_day","Auction.Date":"2024-05-20","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":5679,"Weighted.Average.Discount.Rate":8.483000000000001,"Weighted.Average.Effective.Yield":8.666539059,"Best.Allotted.Rate":8.462999999999999,"Worst.Allotted.Rate":8.503,"Worst.Bid.Rate":8.763999999999999,"Bid.to.Cover.Ratio":3.786,"x":1716163200000,"y":8.483000000000001},{"Treasury.Bond":"T91_day","Auction.Date":"2024-05-27","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3073,"Weighted.Average.Discount.Rate":8.611000000000001,"Weighted.Average.Effective.Yield":8.798180045000001,"Best.Allotted.Rate":8.476000000000001,"Worst.Allotted.Rate":8.659000000000001,"Worst.Bid.Rate":8.821,"Bid.to.Cover.Ratio":2.048666667,"x":1716768000000,"y":8.611000000000001},{"Treasury.Bond":"T91_day","Auction.Date":"2024-06-03","Amount.on.Offer":1500,"Total.Amount.Allocated":2010,"Total.Amount.of.Bids.Received":4455,"Weighted.Average.Discount.Rate":8.504,"Weighted.Average.Effective.Yield":8.68809596,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.603999999999999,"Worst.Bid.Rate":8.864000000000001,"Bid.to.Cover.Ratio":2.21641791,"x":1717372800000,"y":8.504},{"Treasury.Bond":"T91_day","Auction.Date":"2024-06-10","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3664,"Weighted.Average.Discount.Rate":8.518000000000001,"Weighted.Average.Effective.Yield":8.703094757000001,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.603999999999999,"Worst.Bid.Rate":8.945,"Bid.to.Cover.Ratio":2.442666667,"x":1717977600000,"y":8.518000000000001},{"Treasury.Bond":"T91_day","Auction.Date":"2024-06-14","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":2735,"Weighted.Average.Discount.Rate":8.587,"Weighted.Average.Effective.Yield":8.77,"Best.Allotted.Rate":8.462999999999999,"Worst.Allotted.Rate":8.664,"Worst.Bid.Rate":9.025,"Bid.to.Cover.Ratio":1.823333333,"x":1718323200000,"y":8.587},{"Treasury.Bond":"T91_day","Auction.Date":"2024-06-24","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":6317,"Weighted.Average.Discount.Rate":8.521000000000001,"Weighted.Average.Effective.Yield":8.706,"Best.Allotted.Rate":8.382999999999999,"Worst.Allotted.Rate":8.563000000000001,"Worst.Bid.Rate":8.864000000000001,"Bid.to.Cover.Ratio":4.211333333,"x":1719187200000,"y":8.521000000000001},{"Treasury.Bond":"T91_day","Auction.Date":"2024-07-01","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4049,"Weighted.Average.Discount.Rate":8.510999999999999,"Weighted.Average.Effective.Yield":8.695049013,"Best.Allotted.Rate":8.382999999999999,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.724,"Bid.to.Cover.Ratio":2.699333333,"x":1719792000000,"y":8.510999999999999},{"Treasury.Bond":"T91_day","Auction.Date":"2024-07-08","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4171,"Weighted.Average.Discount.Rate":8.506,"Weighted.Average.Effective.Yield":8.689899344000001,"Best.Allotted.Rate":8.483000000000001,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.724,"Bid.to.Cover.Ratio":2.780666667,"x":1720396800000,"y":8.506},{"Treasury.Bond":"T91_day","Auction.Date":"2024-07-15","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":5578,"Weighted.Average.Discount.Rate":8.442,"Weighted.Average.Effective.Yield":8.623704836,"Best.Allotted.Rate":8.363,"Worst.Allotted.Rate":8.483000000000001,"Worst.Bid.Rate":8.804,"Bid.to.Cover.Ratio":3.718666667,"x":1721001600000,"y":8.442},{"Treasury.Bond":"T91_day","Auction.Date":"2024-07-22","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":5998,"Weighted.Average.Discount.Rate":8.407999999999999,"Weighted.Average.Effective.Yield":8.59,"Best.Allotted.Rate":8.363,"Worst.Allotted.Rate":8.443,"Worst.Bid.Rate":8.804,"Bid.to.Cover.Ratio":3.998666667,"x":1721606400000,"y":8.407999999999999},{"Treasury.Bond":"T91_day","Auction.Date":"2024-07-29","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3696,"Weighted.Average.Discount.Rate":8.327,"Weighted.Average.Effective.Yield":8.504,"Best.Allotted.Rate":8.223000000000001,"Worst.Allotted.Rate":8.382999999999999,"Worst.Bid.Rate":8.603999999999999,"Bid.to.Cover.Ratio":2.464,"x":1722211200000,"y":8.327},{"Treasury.Bond":"T91_day","Auction.Date":"2024-08-05","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4203,"Weighted.Average.Discount.Rate":8.282999999999999,"Weighted.Average.Effective.Yield":8.458130868,"Best.Allotted.Rate":8.182,"Worst.Allotted.Rate":8.323,"Worst.Bid.Rate":8.542999999999999,"Bid.to.Cover.Ratio":2.802,"x":1722816000000,"y":8.282999999999999},{"Treasury.Bond":"T91_day","Auction.Date":"2024-08-12","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":6662,"Weighted.Average.Discount.Rate":8.252000000000001,"Weighted.Average.Effective.Yield":8.425444684,"Best.Allotted.Rate":8.202,"Worst.Allotted.Rate":8.263,"Worst.Bid.Rate":8.704000000000001,"Bid.to.Cover.Ratio":4.441333333,"x":1723420800000,"y":8.252000000000001},{"Treasury.Bond":"T91_day","Auction.Date":"2024-08-19","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4905,"Weighted.Average.Discount.Rate":8.192,"Weighted.Average.Effective.Yield":8.362568072,"Best.Allotted.Rate":8.182,"Worst.Allotted.Rate":8.202,"Worst.Bid.Rate":8.542999999999999,"Bid.to.Cover.Ratio":3.27,"x":1724025600000,"y":8.192},{"Treasury.Bond":"T91_day","Auction.Date":"2024-08-26","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4125,"Weighted.Average.Discount.Rate":8.125999999999999,"Weighted.Average.Effective.Yield":8.29399884,"Best.Allotted.Rate":7.962,"Worst.Allotted.Rate":8.162000000000001,"Worst.Bid.Rate":8.542999999999999,"Bid.to.Cover.Ratio":2.75,"x":1724630400000,"y":8.125999999999999},{"Treasury.Bond":"T91_day","Auction.Date":"2024-09-02","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":2526,"Weighted.Average.Discount.Rate":8.138,"Weighted.Average.Effective.Yield":8.306198996999999,"Best.Allotted.Rate":7.862,"Worst.Allotted.Rate":8.303000000000001,"Worst.Bid.Rate":8.523,"Bid.to.Cover.Ratio":1.684,"x":1725235200000,"y":8.138},{"Treasury.Bond":"T91_day","Auction.Date":"2024-09-09","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3960,"Weighted.Average.Discount.Rate":8.128,"Weighted.Average.Effective.Yield":8.296507119999999,"Best.Allotted.Rate":8.102,"Worst.Allotted.Rate":8.141999999999999,"Worst.Bid.Rate":8.584,"Bid.to.Cover.Ratio":2.64,"x":1725840000000,"y":8.128},{"Treasury.Bond":"T91_day","Auction.Date":"2024-09-16","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4617,"Weighted.Average.Discount.Rate":8.128,"Weighted.Average.Effective.Yield":8.296381760999999,"Best.Allotted.Rate":8.082000000000001,"Worst.Allotted.Rate":8.162000000000001,"Worst.Bid.Rate":8.423,"Bid.to.Cover.Ratio":3.078,"x":1726444800000,"y":8.128},{"Treasury.Bond":"T91_day","Auction.Date":"2024-09-23","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":5464,"Weighted.Average.Discount.Rate":7.97,"Weighted.Average.Effective.Yield":8.134934334,"Best.Allotted.Rate":7.928,"Worst.Allotted.Rate":8.065,"Worst.Bid.Rate":8.536,"Bid.to.Cover.Ratio":3.642666667,"x":1727049600000,"y":7.97},{"Treasury.Bond":"T91_day","Auction.Date":"2024-09-30","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":1979,"Weighted.Average.Discount.Rate":8.035,"Weighted.Average.Effective.Yield":8.200858147,"Best.Allotted.Rate":7.955,"Worst.Allotted.Rate":8.153,"Worst.Bid.Rate":8.49,"Bid.to.Cover.Ratio":1.319333333,"x":1727654400000,"y":8.035},{"Treasury.Bond":"T91_day","Auction.Date":"2024-10-07","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3706,"Weighted.Average.Discount.Rate":8.012,"Weighted.Average.Effective.Yield":8.175780173,"Best.Allotted.Rate":7.942,"Worst.Allotted.Rate":8.042,"Worst.Bid.Rate":8.542999999999999,"Bid.to.Cover.Ratio":2.470666667,"x":1728259200000,"y":8.012},{"Treasury.Bond":"T91_day","Auction.Date":"2024-10-14","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":5326,"Weighted.Average.Discount.Rate":8.012,"Weighted.Average.Effective.Yield":8.18,"Best.Allotted.Rate":7.942,"Worst.Allotted.Rate":8.042,"Worst.Bid.Rate":8.263,"Bid.to.Cover.Ratio":3.550666667,"x":1728864000000,"y":8.012},{"Treasury.Bond":"T91_day","Auction.Date":"2024-10-21","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":5359,"Weighted.Average.Discount.Rate":7.991,"Weighted.Average.Effective.Yield":8.153397119999999,"Best.Allotted.Rate":7.841,"Worst.Allotted.Rate":8.002000000000001,"Worst.Bid.Rate":8.223000000000001,"Bid.to.Cover.Ratio":3.572666667,"x":1729468800000,"y":7.991},{"Treasury.Bond":"T91_day","Auction.Date":"2024-10-28","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3593,"Weighted.Average.Discount.Rate":7.975,"Weighted.Average.Effective.Yield":8.137022014999999,"Best.Allotted.Rate":7.962,"Worst.Allotted.Rate":8.002000000000001,"Worst.Bid.Rate":8.223000000000001,"Bid.to.Cover.Ratio":2.395333333,"x":1730073600000,"y":7.975},{"Treasury.Bond":"T91_day","Auction.Date":"2024-11-04","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3478,"Weighted.Average.Discount.Rate":7.98,"Weighted.Average.Effective.Yield":8.141983819,"Best.Allotted.Rate":7.962,"Worst.Allotted.Rate":7.982,"Worst.Bid.Rate":8.223000000000001,"Bid.to.Cover.Ratio":2.318666667,"x":1730678400000,"y":7.98},{"Treasury.Bond":"T91_day","Auction.Date":"2024-11-11","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3552,"Weighted.Average.Discount.Rate":7.953,"Weighted.Average.Effective.Yield":8.114029489,"Best.Allotted.Rate":7.821,"Worst.Allotted.Rate":7.982,"Worst.Bid.Rate":8.202,"Bid.to.Cover.Ratio":2.368,"x":1731283200000,"y":7.953},{"Treasury.Bond":"T91_day","Auction.Date":"2024-11-18","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3832,"Weighted.Average.Discount.Rate":7.937,"Weighted.Average.Effective.Yield":8.097450197000001,"Best.Allotted.Rate":7.902,"Worst.Allotted.Rate":7.942,"Worst.Bid.Rate":8.202,"Bid.to.Cover.Ratio":2.554666667,"x":1731888000000,"y":7.937},{"Treasury.Bond":"T91_day","Auction.Date":"2024-11-25","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3846,"Weighted.Average.Discount.Rate":7.807,"Weighted.Average.Effective.Yield":7.962447324,"Best.Allotted.Rate":7.741,"Worst.Allotted.Rate":7.841,"Worst.Bid.Rate":7.982,"Bid.to.Cover.Ratio":2.564,"x":1732492800000,"y":7.807},{"Treasury.Bond":"T91_day","Auction.Date":"2024-12-02","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":3909,"Weighted.Average.Discount.Rate":7.785,"Weighted.Average.Effective.Yield":7.939,"Best.Allotted.Rate":7.621,"Worst.Allotted.Rate":7.801,"Worst.Bid.Rate":8.343,"Bid.to.Cover.Ratio":2.606,"x":1733097600000,"y":7.785},{"Treasury.Bond":"T91_day","Auction.Date":"2024-12-09","Amount.on.Offer":1500,"Total.Amount.Allocated":1378,"Total.Amount.of.Bids.Received":1478,"Weighted.Average.Discount.Rate":7.827,"Weighted.Average.Effective.Yield":7.982774996,"Best.Allotted.Rate":7.741,"Worst.Allotted.Rate":8.002000000000001,"Worst.Bid.Rate":8.784000000000001,"Bid.to.Cover.Ratio":1.07256894,"x":1733702400000,"y":7.827},{"Treasury.Bond":"T91_day","Auction.Date":"2024-12-13","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4360,"Weighted.Average.Discount.Rate":7.827,"Weighted.Average.Effective.Yield":7.982542571,"Best.Allotted.Rate":7.821,"Worst.Allotted.Rate":7.841,"Worst.Bid.Rate":8.122,"Bid.to.Cover.Ratio":2.906666667,"x":1734048000000,"y":7.827},{"Treasury.Bond":"T91_day","Auction.Date":"2024-12-23","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4380,"Weighted.Average.Discount.Rate":7.813,"Weighted.Average.Effective.Yield":7.968212706,"Best.Allotted.Rate":7.792,"Worst.Allotted.Rate":7.833,"Worst.Bid.Rate":8.119999999999999,"Bid.to.Cover.Ratio":2.92,"x":1734912000000,"y":7.813},{"Treasury.Bond":"T91_day","Auction.Date":"2024-12-30","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":4619,"Weighted.Average.Discount.Rate":7.712,"Weighted.Average.Effective.Yield":7.863186895,"Best.Allotted.Rate":7.706,"Worst.Allotted.Rate":7.726,"Worst.Bid.Rate":8.050000000000001,"Bid.to.Cover.Ratio":3.079333333,"x":1735516800000,"y":7.712},{"Treasury.Bond":"T91_day","Auction.Date":"2025-01-06","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":2030,"Weighted.Average.Discount.Rate":7.764,"Weighted.Average.Effective.Yield":7.917252854,"Best.Allotted.Rate":7.661,"Worst.Allotted.Rate":7.942,"Worst.Bid.Rate":8.282999999999999,"Bid.to.Cover.Ratio":1.353333333,"x":1736121600000,"y":7.764},{"Treasury.Bond":"T91_day","Auction.Date":"2025-01-13","Amount.on.Offer":1500,"Total.Amount.Allocated":395,"Total.Amount.of.Bids.Received":854,"Weighted.Average.Discount.Rate":7.769,"Weighted.Average.Effective.Yield":7.922452257,"Best.Allotted.Rate":7.661,"Worst.Allotted.Rate":7.781,"Worst.Bid.Rate":8.042,"Bid.to.Cover.Ratio":2.162025316,"x":1736726400000,"y":7.769},{"Treasury.Bond":"T91_day","Auction.Date":"2025-01-20","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":2628,"Weighted.Average.Discount.Rate":7.768,"Weighted.Average.Effective.Yield":7.921412366,"Best.Allotted.Rate":7.721,"Worst.Allotted.Rate":7.862,"Worst.Bid.Rate":8.042,"Bid.to.Cover.Ratio":1.752,"x":1737331200000,"y":7.768},{"Treasury.Bond":"T91_day","Auction.Date":"2025-01-27","Amount.on.Offer":1500,"Total.Amount.Allocated":1500,"Total.Amount.of.Bids.Received":6318,"Weighted.Average.Discount.Rate":7.705,"Weighted.Average.Effective.Yield":7.855909876,"Best.Allotted.Rate":7.661,"Worst.Allotted.Rate":7.721,"Worst.Bid.Rate":8.223000000000001,"Bid.to.Cover.Ratio":4.212,"x":1737936000000,"y":7.705}],"type":"line","name":"T91 Discount Rate"},{"group":"group","data":[{"Treasury.Bond":"T182_day","Auction.Date":"2024-01-08","Amount.on.Offer":3600,"Total.Amount.Allocated":3600,"Total.Amount.of.Bids.Received":6552,"Weighted.Average.Discount.Rate":8.736000000000001,"Weighted.Average.Effective.Yield":9.133910597,"Best.Allotted.Rate":8.673999999999999,"Worst.Allotted.Rate":8.773999999999999,"Worst.Bid.Rate":9.015000000000001,"Bid.to.Cover.Ratio":1.82,"x":1704672000000,"y":8.736000000000001},{"Treasury.Bond":"T182_day","Auction.Date":"2024-01-15","Amount.on.Offer":3600,"Total.Amount.Allocated":3600,"Total.Amount.of.Bids.Received":7850,"Weighted.Average.Discount.Rate":8.727,"Weighted.Average.Effective.Yield":9.119999999999999,"Best.Allotted.Rate":8.664,"Worst.Allotted.Rate":8.763999999999999,"Worst.Bid.Rate":9.015000000000001,"Bid.to.Cover.Ratio":2.180555556,"x":1705276800000,"y":8.727},{"Treasury.Bond":"T182_day","Auction.Date":"2024-01-22","Amount.on.Offer":3600,"Total.Amount.Allocated":3600,"Total.Amount.of.Bids.Received":11521,"Weighted.Average.Discount.Rate":8.712999999999999,"Weighted.Average.Effective.Yield":9.109999999999999,"Best.Allotted.Rate":8.664,"Worst.Allotted.Rate":8.734,"Worst.Bid.Rate":8.945,"Bid.to.Cover.Ratio":3.200277778,"x":1705881600000,"y":8.712999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-01-29","Amount.on.Offer":3600,"Total.Amount.Allocated":3600,"Total.Amount.of.Bids.Received":12599,"Weighted.Average.Discount.Rate":8.685,"Weighted.Average.Effective.Yield":9.08,"Best.Allotted.Rate":8.644,"Worst.Allotted.Rate":8.704000000000001,"Worst.Bid.Rate":8.975,"Bid.to.Cover.Ratio":3.499722222,"x":1706486400000,"y":8.685},{"Treasury.Bond":"T182_day","Auction.Date":"2024-02-05","Amount.on.Offer":2500,"Total.Amount.Allocated":2500,"Total.Amount.of.Bids.Received":11909,"Weighted.Average.Discount.Rate":8.609999999999999,"Weighted.Average.Effective.Yield":9,"Best.Allotted.Rate":8.523,"Worst.Allotted.Rate":8.644,"Worst.Bid.Rate":8.874000000000001,"Bid.to.Cover.Ratio":4.7636,"x":1707091200000,"y":8.609999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-02-12","Amount.on.Offer":2500,"Total.Amount.Allocated":2500,"Total.Amount.of.Bids.Received":11920,"Weighted.Average.Discount.Rate":8.574999999999999,"Weighted.Average.Effective.Yield":8.960000000000001,"Best.Allotted.Rate":8.483000000000001,"Worst.Allotted.Rate":8.593999999999999,"Worst.Bid.Rate":8.874000000000001,"Bid.to.Cover.Ratio":4.768,"x":1707696000000,"y":8.574999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-02-19","Amount.on.Offer":2500,"Total.Amount.Allocated":2500,"Total.Amount.of.Bids.Received":13657,"Weighted.Average.Discount.Rate":8.539,"Weighted.Average.Effective.Yield":8.92,"Best.Allotted.Rate":8.523,"Worst.Allotted.Rate":8.553000000000001,"Worst.Bid.Rate":8.824,"Bid.to.Cover.Ratio":5.4628,"x":1708300800000,"y":8.539},{"Treasury.Bond":"T182_day","Auction.Date":"2024-02-26","Amount.on.Offer":2500,"Total.Amount.Allocated":2500,"Total.Amount.of.Bids.Received":11980,"Weighted.Average.Discount.Rate":8.504,"Weighted.Average.Effective.Yield":8.880000000000001,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.523,"Worst.Bid.Rate":8.794,"Bid.to.Cover.Ratio":4.792,"x":1708905600000,"y":8.504},{"Treasury.Bond":"T182_day","Auction.Date":"2024-03-04","Amount.on.Offer":2500,"Total.Amount.Allocated":2500,"Total.Amount.of.Bids.Received":7249,"Weighted.Average.Discount.Rate":8.499000000000001,"Weighted.Average.Effective.Yield":8.880000000000001,"Best.Allotted.Rate":8.428000000000001,"Worst.Allotted.Rate":8.513,"Worst.Bid.Rate":8.794,"Bid.to.Cover.Ratio":2.8996,"x":1709510400000,"y":8.499000000000001},{"Treasury.Bond":"T182_day","Auction.Date":"2024-03-11","Amount.on.Offer":2500,"Total.Amount.Allocated":2500,"Total.Amount.of.Bids.Received":12291,"Weighted.Average.Discount.Rate":8.459,"Weighted.Average.Effective.Yield":8.83,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.462999999999999,"Worst.Bid.Rate":8.794,"Bid.to.Cover.Ratio":4.9164,"x":1710115200000,"y":8.459},{"Treasury.Bond":"T182_day","Auction.Date":"2024-03-18","Amount.on.Offer":2500,"Total.Amount.Allocated":2500,"Total.Amount.of.Bids.Received":10211,"Weighted.Average.Discount.Rate":8.438000000000001,"Weighted.Average.Effective.Yield":8.81,"Best.Allotted.Rate":8.413,"Worst.Allotted.Rate":8.452999999999999,"Worst.Bid.Rate":8.794,"Bid.to.Cover.Ratio":4.0844,"x":1710720000000,"y":8.438000000000001},{"Treasury.Bond":"T182_day","Auction.Date":"2024-03-25","Amount.on.Offer":2500,"Total.Amount.Allocated":2500,"Total.Amount.of.Bids.Received":9447,"Weighted.Average.Discount.Rate":8.428000000000001,"Weighted.Average.Effective.Yield":8.800000000000001,"Best.Allotted.Rate":8.343,"Worst.Allotted.Rate":8.443,"Worst.Bid.Rate":8.683999999999999,"Bid.to.Cover.Ratio":3.7788,"x":1711324800000,"y":8.428000000000001},{"Treasury.Bond":"T182_day","Auction.Date":"2024-03-28","Amount.on.Offer":3550,"Total.Amount.Allocated":3820,"Total.Amount.of.Bids.Received":9270,"Weighted.Average.Discount.Rate":8.491,"Weighted.Average.Effective.Yield":8.869999999999999,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.794,"Bid.to.Cover.Ratio":2.426701571,"x":1711584000000,"y":8.491},{"Treasury.Bond":"T182_day","Auction.Date":"2024-04-08","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":16088,"Weighted.Average.Discount.Rate":8.449999999999999,"Weighted.Average.Effective.Yield":8.822846876,"Best.Allotted.Rate":8.4,"Worst.Allotted.Rate":8.48,"Worst.Bid.Rate":8.789999999999999,"Bid.to.Cover.Ratio":4.531830986,"x":1712534400000,"y":8.449999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-04-15","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":9817,"Weighted.Average.Discount.Rate":8.427,"Weighted.Average.Effective.Yield":8.79629853,"Best.Allotted.Rate":8.382999999999999,"Worst.Allotted.Rate":8.462999999999999,"Worst.Bid.Rate":8.794,"Bid.to.Cover.Ratio":2.765352113,"x":1713139200000,"y":8.427},{"Treasury.Bond":"T182_day","Auction.Date":"2024-04-22","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":6436,"Weighted.Average.Discount.Rate":8.499000000000001,"Weighted.Average.Effective.Yield":8.87508746,"Best.Allotted.Rate":8.403,"Worst.Allotted.Rate":8.614000000000001,"Worst.Bid.Rate":8.794,"Bid.to.Cover.Ratio":1.812957746,"x":1713744000000,"y":8.499000000000001},{"Treasury.Bond":"T182_day","Auction.Date":"2024-04-29","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":5981,"Weighted.Average.Discount.Rate":8.596,"Weighted.Average.Effective.Yield":8.978549722,"Best.Allotted.Rate":8.470000000000001,"Worst.Allotted.Rate":8.712,"Worst.Bid.Rate":8.802,"Bid.to.Cover.Ratio":1.684788732,"x":1714348800000,"y":8.596},{"Treasury.Bond":"T182_day","Auction.Date":"2024-05-06","Amount.on.Offer":3550,"Total.Amount.Allocated":5230,"Total.Amount.of.Bids.Received":12906,"Weighted.Average.Discount.Rate":8.571,"Weighted.Average.Effective.Yield":8.953344288,"Best.Allotted.Rate":8.523,"Worst.Allotted.Rate":8.584,"Worst.Bid.Rate":8.843999999999999,"Bid.to.Cover.Ratio":2.467686424,"x":1714953600000,"y":8.571},{"Treasury.Bond":"T182_day","Auction.Date":"2024-05-13","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":9334,"Weighted.Average.Discount.Rate":8.513999999999999,"Weighted.Average.Effective.Yield":8.891814143,"Best.Allotted.Rate":8.483000000000001,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.804,"Bid.to.Cover.Ratio":2.629295775,"x":1715558400000,"y":8.513999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-05-20","Amount.on.Offer":3550,"Total.Amount.Allocated":2050,"Total.Amount.of.Bids.Received":6450,"Weighted.Average.Discount.Rate":8.558,"Weighted.Average.Effective.Yield":8.939368186999999,"Best.Allotted.Rate":8.483000000000001,"Worst.Allotted.Rate":8.624000000000001,"Worst.Bid.Rate":8.794,"Bid.to.Cover.Ratio":3.146341463,"x":1716163200000,"y":8.558},{"Treasury.Bond":"T182_day","Auction.Date":"2024-05-27","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":5788,"Weighted.Average.Discount.Rate":8.593999999999999,"Weighted.Average.Effective.Yield":8.976096126,"Best.Allotted.Rate":8.52,"Worst.Allotted.Rate":8.661,"Worst.Bid.Rate":8.802,"Bid.to.Cover.Ratio":1.630422535,"x":1716768000000,"y":8.593999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-06-03","Amount.on.Offer":3550,"Total.Amount.Allocated":3040,"Total.Amount.of.Bids.Received":4810,"Weighted.Average.Discount.Rate":8.673999999999999,"Weighted.Average.Effective.Yield":9.066456854,"Best.Allotted.Rate":8.573,"Worst.Allotted.Rate":8.773999999999999,"Worst.Bid.Rate":8.933999999999999,"Bid.to.Cover.Ratio":1.582236842,"x":1717372800000,"y":8.673999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-06-10","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":7378,"Weighted.Average.Discount.Rate":8.679,"Weighted.Average.Effective.Yield":9.071870483,"Best.Allotted.Rate":8.573,"Worst.Allotted.Rate":8.724,"Worst.Bid.Rate":9.025,"Bid.to.Cover.Ratio":2.078309859,"x":1717977600000,"y":8.679},{"Treasury.Bond":"T182_day","Auction.Date":"2024-06-14","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":7856,"Weighted.Average.Discount.Rate":8.68,"Weighted.Average.Effective.Yield":9.07,"Best.Allotted.Rate":8.593999999999999,"Worst.Allotted.Rate":8.724,"Worst.Bid.Rate":8.874000000000001,"Bid.to.Cover.Ratio":2.212957746,"x":1718323200000,"y":8.68},{"Treasury.Bond":"T182_day","Auction.Date":"2024-06-24","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":7909,"Weighted.Average.Discount.Rate":8.648999999999999,"Weighted.Average.Effective.Yield":9.039,"Best.Allotted.Rate":8.49,"Worst.Allotted.Rate":8.708,"Worst.Bid.Rate":8.887,"Bid.to.Cover.Ratio":2.227887324,"x":1719187200000,"y":8.648999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-07-01","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":9282,"Weighted.Average.Discount.Rate":8.558999999999999,"Weighted.Average.Effective.Yield":8.942797483,"Best.Allotted.Rate":8.477,"Worst.Allotted.Rate":8.616,"Worst.Bid.Rate":8.795999999999999,"Bid.to.Cover.Ratio":2.614647887,"x":1719792000000,"y":8.558999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-07-08","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":12867,"Weighted.Average.Discount.Rate":8.481999999999999,"Weighted.Average.Effective.Yield":8.856663478,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.542999999999999,"Worst.Bid.Rate":8.744,"Bid.to.Cover.Ratio":3.624507042,"x":1720396800000,"y":8.481999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-07-15","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":9588,"Weighted.Average.Discount.Rate":8.417,"Weighted.Average.Effective.Yield":8.785563515,"Best.Allotted.Rate":8.353,"Worst.Allotted.Rate":8.452999999999999,"Worst.Bid.Rate":8.724,"Bid.to.Cover.Ratio":2.70084507,"x":1721001600000,"y":8.417},{"Treasury.Bond":"T182_day","Auction.Date":"2024-07-22","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":11507,"Weighted.Average.Discount.Rate":8.395,"Weighted.Average.Effective.Yield":8.76,"Best.Allotted.Rate":8.202,"Worst.Allotted.Rate":8.413,"Worst.Bid.Rate":8.724,"Bid.to.Cover.Ratio":3.241408451,"x":1721606400000,"y":8.395},{"Treasury.Bond":"T182_day","Auction.Date":"2024-07-29","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":7550,"Weighted.Average.Discount.Rate":8.362,"Weighted.Average.Effective.Yield":8.726000000000001,"Best.Allotted.Rate":8.282999999999999,"Worst.Allotted.Rate":8.393000000000001,"Worst.Bid.Rate":8.683999999999999,"Bid.to.Cover.Ratio":2.126760563,"x":1722211200000,"y":8.362},{"Treasury.Bond":"T182_day","Auction.Date":"2024-08-05","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":10749,"Weighted.Average.Discount.Rate":8.276999999999999,"Weighted.Average.Effective.Yield":8.632961074000001,"Best.Allotted.Rate":8.172000000000001,"Worst.Allotted.Rate":8.323,"Worst.Bid.Rate":8.462999999999999,"Bid.to.Cover.Ratio":3.027887324,"x":1722816000000,"y":8.276999999999999},{"Treasury.Bond":"T182_day","Auction.Date":"2024-08-12","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":8871,"Weighted.Average.Discount.Rate":8.193,"Weighted.Average.Effective.Yield":8.542391242000001,"Best.Allotted.Rate":8.112,"Worst.Allotted.Rate":8.243,"Worst.Bid.Rate":8.452999999999999,"Bid.to.Cover.Ratio":2.498873239,"x":1723420800000,"y":8.193},{"Treasury.Bond":"T182_day","Auction.Date":"2024-08-19","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":9090,"Weighted.Average.Discount.Rate":8.144,"Weighted.Average.Effective.Yield":8.489157995999999,"Best.Allotted.Rate":8.071999999999999,"Worst.Allotted.Rate":8.192,"Worst.Bid.Rate":8.563000000000001,"Bid.to.Cover.Ratio":2.56056338,"x":1724025600000,"y":8.144},{"Treasury.Bond":"T182_day","Auction.Date":"2024-08-26","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":8748,"Weighted.Average.Discount.Rate":8.073,"Weighted.Average.Effective.Yield":8.411100711,"Best.Allotted.Rate":8.012,"Worst.Allotted.Rate":8.102,"Worst.Bid.Rate":8.343,"Bid.to.Cover.Ratio":2.464225352,"x":1724630400000,"y":8.073},{"Treasury.Bond":"T182_day","Auction.Date":"2024-09-02","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":4905,"Weighted.Average.Discount.Rate":8.108000000000001,"Weighted.Average.Effective.Yield":8.449481073999999,"Best.Allotted.Rate":7.962,"Worst.Allotted.Rate":8.212999999999999,"Worst.Bid.Rate":8.313000000000001,"Bid.to.Cover.Ratio":1.381690141,"x":1725235200000,"y":8.108000000000001},{"Treasury.Bond":"T182_day","Auction.Date":"2024-09-09","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":7930,"Weighted.Average.Discount.Rate":8.084,"Weighted.Average.Effective.Yield":8.423247986,"Best.Allotted.Rate":8.012,"Worst.Allotted.Rate":8.151999999999999,"Worst.Bid.Rate":8.423,"Bid.to.Cover.Ratio":2.233802817,"x":1725840000000,"y":8.084},{"Treasury.Bond":"T182_day","Auction.Date":"2024-09-16","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":5768,"Weighted.Average.Discount.Rate":8.097,"Weighted.Average.Effective.Yield":8.437582115,"Best.Allotted.Rate":8.002000000000001,"Worst.Allotted.Rate":8.182,"Worst.Bid.Rate":8.363,"Bid.to.Cover.Ratio":1.624788732,"x":1726444800000,"y":8.097},{"Treasury.Bond":"T182_day","Auction.Date":"2024-09-23","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":6776,"Weighted.Average.Discount.Rate":8.054,"Weighted.Average.Effective.Yield":8.391321553999999,"Best.Allotted.Rate":7.922,"Worst.Allotted.Rate":8.122,"Worst.Bid.Rate":8.363,"Bid.to.Cover.Ratio":1.908732394,"x":1727049600000,"y":8.054},{"Treasury.Bond":"T182_day","Auction.Date":"2024-09-30","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":6700,"Weighted.Average.Discount.Rate":8.023,"Weighted.Average.Effective.Yield":8.357722803,"Best.Allotted.Rate":7.962,"Worst.Allotted.Rate":8.061999999999999,"Worst.Bid.Rate":8.243,"Bid.to.Cover.Ratio":1.887323944,"x":1727654400000,"y":8.023},{"Treasury.Bond":"T182_day","Auction.Date":"2024-10-07","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":8277,"Weighted.Average.Discount.Rate":8.018000000000001,"Weighted.Average.Effective.Yield":8.352351175000001,"Best.Allotted.Rate":7.972,"Worst.Allotted.Rate":8.052,"Worst.Bid.Rate":8.333,"Bid.to.Cover.Ratio":2.331549296,"x":1728259200000,"y":8.018000000000001},{"Treasury.Bond":"T182_day","Auction.Date":"2024-10-14","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":4963,"Weighted.Average.Discount.Rate":8.050000000000001,"Weighted.Average.Effective.Yield":8.390000000000001,"Best.Allotted.Rate":7.992,"Worst.Allotted.Rate":8.122,"Worst.Bid.Rate":8.243,"Bid.to.Cover.Ratio":1.398028169,"x":1728864000000,"y":8.050000000000001},{"Treasury.Bond":"T182_day","Auction.Date":"2024-10-21","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":7732,"Weighted.Average.Discount.Rate":8.039,"Weighted.Average.Effective.Yield":8.374747059000001,"Best.Allotted.Rate":7.972,"Worst.Allotted.Rate":8.082000000000001,"Worst.Bid.Rate":8.343,"Bid.to.Cover.Ratio":2.178028169,"x":1729468800000,"y":8.039},{"Treasury.Bond":"T182_day","Auction.Date":"2024-10-28","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":6486,"Weighted.Average.Discount.Rate":8.058,"Weighted.Average.Effective.Yield":8.395363181,"Best.Allotted.Rate":7.992,"Worst.Allotted.Rate":8.112,"Worst.Bid.Rate":8.243,"Bid.to.Cover.Ratio":1.827042254,"x":1730073600000,"y":8.058},{"Treasury.Bond":"T182_day","Auction.Date":"2024-11-04","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":9632,"Weighted.Average.Discount.Rate":8.044,"Weighted.Average.Effective.Yield":8.380353961999999,"Best.Allotted.Rate":8.012,"Worst.Allotted.Rate":8.061999999999999,"Worst.Bid.Rate":8.292999999999999,"Bid.to.Cover.Ratio":2.713239437,"x":1730678400000,"y":8.044},{"Treasury.Bond":"T182_day","Auction.Date":"2024-11-11","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":11205,"Weighted.Average.Discount.Rate":8.01,"Weighted.Average.Effective.Yield":8.343573386999999,"Best.Allotted.Rate":7.952,"Worst.Allotted.Rate":8.032,"Worst.Bid.Rate":8.223000000000001,"Bid.to.Cover.Ratio":3.156338028,"x":1731283200000,"y":8.01},{"Treasury.Bond":"T182_day","Auction.Date":"2024-11-18","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":11208,"Weighted.Average.Discount.Rate":7.989,"Weighted.Average.Effective.Yield":8.320686117999999,"Best.Allotted.Rate":7.922,"Worst.Allotted.Rate":8.002000000000001,"Worst.Bid.Rate":8.182,"Bid.to.Cover.Ratio":3.157183099,"x":1731888000000,"y":7.989},{"Treasury.Bond":"T182_day","Auction.Date":"2024-11-25","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":5097,"Weighted.Average.Discount.Rate":7.953,"Weighted.Average.Effective.Yield":8.281674762,"Best.Allotted.Rate":7.751,"Worst.Allotted.Rate":8.022,"Worst.Bid.Rate":8.122,"Bid.to.Cover.Ratio":1.435774648,"x":1732492800000,"y":7.953},{"Treasury.Bond":"T182_day","Auction.Date":"2024-12-02","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":7491,"Weighted.Average.Discount.Rate":7.943,"Weighted.Average.Effective.Yield":8.271000000000001,"Best.Allotted.Rate":7.781,"Worst.Allotted.Rate":7.962,"Worst.Bid.Rate":8.172000000000001,"Bid.to.Cover.Ratio":2.110140845,"x":1733097600000,"y":7.943},{"Treasury.Bond":"T182_day","Auction.Date":"2024-12-09","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":4739,"Weighted.Average.Discount.Rate":7.974,"Weighted.Average.Effective.Yield":8.304180591,"Best.Allotted.Rate":7.882,"Worst.Allotted.Rate":8.061999999999999,"Worst.Bid.Rate":8.614000000000001,"Bid.to.Cover.Ratio":1.334929577,"x":1733702400000,"y":7.974},{"Treasury.Bond":"T182_day","Auction.Date":"2024-12-13","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":5688,"Weighted.Average.Discount.Rate":8.037000000000001,"Weighted.Average.Effective.Yield":8.372625772999999,"Best.Allotted.Rate":7.952,"Worst.Allotted.Rate":8.112,"Worst.Bid.Rate":8.292999999999999,"Bid.to.Cover.Ratio":1.602253521,"x":1734048000000,"y":8.037000000000001},{"Treasury.Bond":"T182_day","Auction.Date":"2024-12-23","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":6043,"Weighted.Average.Discount.Rate":8.038,"Weighted.Average.Effective.Yield":8.373613512,"Best.Allotted.Rate":7.969,"Worst.Allotted.Rate":8.090999999999999,"Worst.Bid.Rate":8.526999999999999,"Bid.to.Cover.Ratio":1.702253521,"x":1734912000000,"y":8.038},{"Treasury.Bond":"T182_day","Auction.Date":"2024-12-30","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":9190,"Weighted.Average.Discount.Rate":8.029,"Weighted.Average.Effective.Yield":8.363846718,"Best.Allotted.Rate":7.986,"Worst.Allotted.Rate":8.045999999999999,"Worst.Bid.Rate":8.298,"Bid.to.Cover.Ratio":2.588732394,"x":1735516800000,"y":8.029},{"Treasury.Bond":"T182_day","Auction.Date":"2025-01-06","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":6316,"Weighted.Average.Discount.Rate":8.012,"Weighted.Average.Effective.Yield":8.345400821,"Best.Allotted.Rate":7.892,"Worst.Allotted.Rate":8.042,"Worst.Bid.Rate":8.223000000000001,"Bid.to.Cover.Ratio":1.77915493,"x":1736121600000,"y":8.012},{"Treasury.Bond":"T182_day","Auction.Date":"2025-01-13","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":12501,"Weighted.Average.Discount.Rate":7.982,"Weighted.Average.Effective.Yield":8.312857182,"Best.Allotted.Rate":7.902,"Worst.Allotted.Rate":8.002000000000001,"Worst.Bid.Rate":8.282999999999999,"Bid.to.Cover.Ratio":3.521408451,"x":1736726400000,"y":7.982},{"Treasury.Bond":"T182_day","Auction.Date":"2025-01-20","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":12238,"Weighted.Average.Discount.Rate":7.952,"Weighted.Average.Effective.Yield":8.280323681,"Best.Allotted.Rate":7.902,"Worst.Allotted.Rate":7.962,"Worst.Bid.Rate":8.141999999999999,"Bid.to.Cover.Ratio":3.447323944,"x":1737331200000,"y":7.952},{"Treasury.Bond":"T182_day","Auction.Date":"2025-01-27","Amount.on.Offer":3550,"Total.Amount.Allocated":3550,"Total.Amount.of.Bids.Received":14279,"Weighted.Average.Discount.Rate":7.894,"Weighted.Average.Effective.Yield":8.217454310999999,"Best.Allotted.Rate":7.811,"Worst.Allotted.Rate":7.902,"Worst.Bid.Rate":8.112,"Bid.to.Cover.Ratio":4.022253521,"x":1737936000000,"y":7.894}],"type":"line","name":"T182 Discount Rate"},{"group":"group","data":[{"Treasury.Bond":"T273_day","Auction.Date":"2024-01-08","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":9329,"Weighted.Average.Discount.Rate":8.584,"Weighted.Average.Effective.Yield":9.173228193,"Best.Allotted.Rate":8.503,"Worst.Allotted.Rate":8.624000000000001,"Worst.Bid.Rate":8.858000000000001,"Bid.to.Cover.Ratio":2.028043478,"x":1704672000000,"y":8.584},{"Treasury.Bond":"T273_day","Auction.Date":"2024-01-15","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":9421,"Weighted.Average.Discount.Rate":8.558999999999999,"Weighted.Average.Effective.Yield":9.140000000000001,"Best.Allotted.Rate":8.523,"Worst.Allotted.Rate":8.609999999999999,"Worst.Bid.Rate":8.858000000000001,"Bid.to.Cover.Ratio":2.048043478,"x":1705276800000,"y":8.558999999999999},{"Treasury.Bond":"T273_day","Auction.Date":"2024-01-22","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":12545,"Weighted.Average.Discount.Rate":8.526999999999999,"Weighted.Average.Effective.Yield":9.109999999999999,"Best.Allotted.Rate":8.503,"Worst.Allotted.Rate":8.557,"Worst.Bid.Rate":9.305,"Bid.to.Cover.Ratio":2.727173913,"x":1705881600000,"y":8.526999999999999},{"Treasury.Bond":"T273_day","Auction.Date":"2024-01-29","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":13437,"Weighted.Average.Discount.Rate":8.52,"Weighted.Average.Effective.Yield":9.1,"Best.Allotted.Rate":8.436,"Worst.Allotted.Rate":8.529999999999999,"Worst.Bid.Rate":8.904,"Bid.to.Cover.Ratio":2.921086957,"x":1706486400000,"y":8.52},{"Treasury.Bond":"T273_day","Auction.Date":"2024-02-05","Amount.on.Offer":3200,"Total.Amount.Allocated":3200,"Total.Amount.of.Bids.Received":10271,"Weighted.Average.Discount.Rate":8.478,"Weighted.Average.Effective.Yield":9.050000000000001,"Best.Allotted.Rate":8.390000000000001,"Worst.Allotted.Rate":8.503,"Worst.Bid.Rate":8.791,"Bid.to.Cover.Ratio":3.2096875,"x":1707091200000,"y":8.478},{"Treasury.Bond":"T273_day","Auction.Date":"2024-02-12","Amount.on.Offer":3200,"Total.Amount.Allocated":3200,"Total.Amount.of.Bids.Received":15103,"Weighted.Average.Discount.Rate":8.441000000000001,"Weighted.Average.Effective.Yield":9.01,"Best.Allotted.Rate":8.416,"Worst.Allotted.Rate":8.449999999999999,"Worst.Bid.Rate":8.791,"Bid.to.Cover.Ratio":1.223186609,"x":1707696000000,"y":8.441000000000001},{"Treasury.Bond":"T273_day","Auction.Date":"2024-02-19","Amount.on.Offer":3200,"Total.Amount.Allocated":3200,"Total.Amount.of.Bids.Received":10546,"Weighted.Average.Discount.Rate":8.396000000000001,"Weighted.Average.Effective.Yield":8.960000000000001,"Best.Allotted.Rate":8.390000000000001,"Worst.Allotted.Rate":8.403,"Worst.Bid.Rate":8.724,"Bid.to.Cover.Ratio":3.295625,"x":1708300800000,"y":8.396000000000001},{"Treasury.Bond":"T273_day","Auction.Date":"2024-02-26","Amount.on.Offer":3200,"Total.Amount.Allocated":3200,"Total.Amount.of.Bids.Received":13278,"Weighted.Average.Discount.Rate":8.371,"Weighted.Average.Effective.Yield":8.93,"Best.Allotted.Rate":8.363,"Worst.Allotted.Rate":8.390000000000001,"Worst.Bid.Rate":8.791,"Bid.to.Cover.Ratio":4.149375,"x":1708905600000,"y":8.371},{"Treasury.Bond":"T273_day","Auction.Date":"2024-03-04","Amount.on.Offer":3200,"Total.Amount.Allocated":3200,"Total.Amount.of.Bids.Received":9394,"Weighted.Average.Discount.Rate":8.340999999999999,"Weighted.Average.Effective.Yield":8.9,"Best.Allotted.Rate":8.316000000000001,"Worst.Allotted.Rate":8.356,"Worst.Bid.Rate":8.791,"Bid.to.Cover.Ratio":2.935625,"x":1709510400000,"y":8.340999999999999},{"Treasury.Bond":"T273_day","Auction.Date":"2024-03-11","Amount.on.Offer":3200,"Total.Amount.Allocated":3200,"Total.Amount.of.Bids.Received":9212,"Weighted.Average.Discount.Rate":8.311,"Weighted.Average.Effective.Yield":8.859999999999999,"Best.Allotted.Rate":8.256,"Worst.Allotted.Rate":8.329000000000001,"Worst.Bid.Rate":8.724,"Bid.to.Cover.Ratio":2.87875,"x":1710115200000,"y":8.311},{"Treasury.Bond":"T273_day","Auction.Date":"2024-03-18","Amount.on.Offer":3200,"Total.Amount.Allocated":3200,"Total.Amount.of.Bids.Received":10514,"Weighted.Average.Discount.Rate":8.286,"Weighted.Average.Effective.Yield":8.83,"Best.Allotted.Rate":8.263,"Worst.Allotted.Rate":8.303000000000001,"Worst.Bid.Rate":8.791,"Bid.to.Cover.Ratio":3.285625,"x":1710720000000,"y":8.286},{"Treasury.Bond":"T273_day","Auction.Date":"2024-03-25","Amount.on.Offer":3200,"Total.Amount.Allocated":3200,"Total.Amount.of.Bids.Received":9685,"Weighted.Average.Discount.Rate":8.241,"Weighted.Average.Effective.Yield":8.789999999999999,"Best.Allotted.Rate":8.215999999999999,"Worst.Allotted.Rate":8.256,"Worst.Bid.Rate":8.787000000000001,"Bid.to.Cover.Ratio":3.0265625,"x":1711324800000,"y":8.241},{"Treasury.Bond":"T273_day","Auction.Date":"2024-03-28","Amount.on.Offer":4600,"Total.Amount.Allocated":4785,"Total.Amount.of.Bids.Received":12207,"Weighted.Average.Discount.Rate":8.176,"Weighted.Average.Effective.Yield":8.710000000000001,"Best.Allotted.Rate":8.146000000000001,"Worst.Allotted.Rate":8.239000000000001,"Worst.Bid.Rate":8.692,"Bid.to.Cover.Ratio":2.551097179,"x":1711584000000,"y":8.176},{"Treasury.Bond":"T273_day","Auction.Date":"2024-04-08","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":8015,"Weighted.Average.Discount.Rate":8.23,"Weighted.Average.Effective.Yield":8.768932507000001,"Best.Allotted.Rate":8.16,"Worst.Allotted.Rate":8.300000000000001,"Worst.Bid.Rate":8.640000000000001,"Bid.to.Cover.Ratio":1.742391304,"x":1712534400000,"y":8.23},{"Treasury.Bond":"T273_day","Auction.Date":"2024-04-15","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":6195,"Weighted.Average.Discount.Rate":8.396000000000001,"Weighted.Average.Effective.Yield":8.958463302,"Best.Allotted.Rate":8.202,"Worst.Allotted.Rate":8.537000000000001,"Worst.Bid.Rate":8.864000000000001,"Bid.to.Cover.Ratio":1.34673913,"x":1713139200000,"y":8.396000000000001},{"Treasury.Bond":"T273_day","Auction.Date":"2024-04-22","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":13311,"Weighted.Average.Discount.Rate":8.427,"Weighted.Average.Effective.Yield":8.993314574999999,"Best.Allotted.Rate":8.35,"Worst.Allotted.Rate":8.449999999999999,"Worst.Bid.Rate":8.864000000000001,"Bid.to.Cover.Ratio":2.893695652,"x":1713744000000,"y":8.427},{"Treasury.Bond":"T273_day","Auction.Date":"2024-04-29","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":8223,"Weighted.Average.Discount.Rate":8.465,"Weighted.Average.Effective.Yield":9.034421641,"Best.Allotted.Rate":8.427,"Worst.Allotted.Rate":8.521000000000001,"Worst.Bid.Rate":8.863,"Bid.to.Cover.Ratio":1.787608696,"x":1714348800000,"y":8.465},{"Treasury.Bond":"T273_day","Auction.Date":"2024-05-06","Amount.on.Offer":4600,"Total.Amount.Allocated":2920,"Total.Amount.of.Bids.Received":4725,"Weighted.Average.Discount.Rate":8.506,"Weighted.Average.Effective.Yield":9.084310616,"Best.Allotted.Rate":8.423,"Worst.Allotted.Rate":8.57,"Worst.Bid.Rate":8.864000000000001,"Bid.to.Cover.Ratio":1.618150685,"x":1714953600000,"y":8.506},{"Treasury.Bond":"T273_day","Auction.Date":"2024-05-13","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":10002,"Weighted.Average.Discount.Rate":8.488,"Weighted.Average.Effective.Yield":9.063484458,"Best.Allotted.Rate":8.462999999999999,"Worst.Allotted.Rate":8.523,"Worst.Bid.Rate":8.776999999999999,"Bid.to.Cover.Ratio":2.174347826,"x":1715558400000,"y":8.488},{"Treasury.Bond":"T273_day","Auction.Date":"2024-05-20","Amount.on.Offer":4600,"Total.Amount.Allocated":3053,"Total.Amount.of.Bids.Received":5753,"Weighted.Average.Discount.Rate":8.52,"Weighted.Average.Effective.Yield":9.09941268,"Best.Allotted.Rate":8.449999999999999,"Worst.Allotted.Rate":8.59,"Worst.Bid.Rate":8.696999999999999,"Bid.to.Cover.Ratio":1.884376024,"x":1716163200000,"y":8.52},{"Treasury.Bond":"T273_day","Auction.Date":"2024-05-27","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":7344,"Weighted.Average.Discount.Rate":8.548999999999999,"Weighted.Average.Effective.Yield":9.130434058000001,"Best.Allotted.Rate":8.521000000000001,"Worst.Allotted.Rate":8.608000000000001,"Worst.Bid.Rate":8.789999999999999,"Bid.to.Cover.Ratio":1.596521739,"x":1716768000000,"y":8.548999999999999},{"Treasury.Bond":"T273_day","Auction.Date":"2024-06-03","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":6527,"Weighted.Average.Discount.Rate":8.587,"Weighted.Average.Effective.Yield":9.176100872999999,"Best.Allotted.Rate":8.503,"Worst.Allotted.Rate":8.664,"Worst.Bid.Rate":8.884,"Bid.to.Cover.Ratio":1.418913043,"x":1717372800000,"y":8.587},{"Treasury.Bond":"T273_day","Auction.Date":"2024-06-10","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":6480,"Weighted.Average.Discount.Rate":8.615,"Weighted.Average.Effective.Yield":9.208910224,"Best.Allotted.Rate":8.523,"Worst.Allotted.Rate":8.683999999999999,"Worst.Bid.Rate":8.811,"Bid.to.Cover.Ratio":1.408695652,"x":1717977600000,"y":8.615},{"Treasury.Bond":"T273_day","Auction.Date":"2024-06-14","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":10932,"Weighted.Average.Discount.Rate":8.582000000000001,"Weighted.Average.Effective.Yield":9.17,"Best.Allotted.Rate":8.523,"Worst.Allotted.Rate":8.603999999999999,"Worst.Bid.Rate":8.771000000000001,"Bid.to.Cover.Ratio":2.376521739,"x":1718323200000,"y":8.582000000000001},{"Treasury.Bond":"T273_day","Auction.Date":"2024-06-24","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":13355,"Weighted.Average.Discount.Rate":8.472,"Weighted.Average.Effective.Yield":9.045,"Best.Allotted.Rate":8.436,"Worst.Allotted.Rate":8.497,"Worst.Bid.Rate":8.696999999999999,"Bid.to.Cover.Ratio":2.90326087,"x":1719187200000,"y":8.472},{"Treasury.Bond":"T273_day","Auction.Date":"2024-07-01","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":14155,"Weighted.Average.Discount.Rate":8.427,"Weighted.Average.Effective.Yield":8.993779726,"Best.Allotted.Rate":8.382999999999999,"Worst.Allotted.Rate":8.443,"Worst.Bid.Rate":8.696999999999999,"Bid.to.Cover.Ratio":3.077173913,"x":1719792000000,"y":8.427},{"Treasury.Bond":"T273_day","Auction.Date":"2024-07-08","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":13797,"Weighted.Average.Discount.Rate":8.387,"Weighted.Average.Effective.Yield":8.948305208000001,"Best.Allotted.Rate":8.343,"Worst.Allotted.Rate":8.403,"Worst.Bid.Rate":8.664,"Bid.to.Cover.Ratio":2.999347826,"x":1720396800000,"y":8.387},{"Treasury.Bond":"T273_day","Auction.Date":"2024-07-15","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":15676,"Weighted.Average.Discount.Rate":8.276999999999999,"Weighted.Average.Effective.Yield":8.823790983,"Best.Allotted.Rate":8.236000000000001,"Worst.Allotted.Rate":8.303000000000001,"Worst.Bid.Rate":8.57,"Bid.to.Cover.Ratio":3.407826087,"x":1721001600000,"y":8.276999999999999},{"Treasury.Bond":"T273_day","Auction.Date":"2024-07-22","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":16433,"Weighted.Average.Discount.Rate":8.243,"Weighted.Average.Effective.Yield":8.779999999999999,"Best.Allotted.Rate":8.209,"Worst.Allotted.Rate":8.263,"Worst.Bid.Rate":8.57,"Bid.to.Cover.Ratio":3.572391304,"x":1721606400000,"y":8.243},{"Treasury.Bond":"T273_day","Auction.Date":"2024-07-29","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":15520,"Weighted.Average.Discount.Rate":8.183999999999999,"Weighted.Average.Effective.Yield":8.718,"Best.Allotted.Rate":8.148999999999999,"Worst.Allotted.Rate":8.202,"Worst.Bid.Rate":8.49,"Bid.to.Cover.Ratio":3.373913043,"x":1722211200000,"y":8.183999999999999},{"Treasury.Bond":"T273_day","Auction.Date":"2024-08-05","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":11252,"Weighted.Average.Discount.Rate":8.073,"Weighted.Average.Effective.Yield":8.592350988,"Best.Allotted.Rate":8.029,"Worst.Allotted.Rate":8.122,"Worst.Bid.Rate":8.49,"Bid.to.Cover.Ratio":2.446086957,"x":1722816000000,"y":8.073},{"Treasury.Bond":"T273_day","Auction.Date":"2024-08-12","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":12868,"Weighted.Average.Discount.Rate":7.909,"Weighted.Average.Effective.Yield":8.406645246,"Best.Allotted.Rate":7.815,"Worst.Allotted.Rate":8.042,"Worst.Bid.Rate":8.483000000000001,"Bid.to.Cover.Ratio":2.797391304,"x":1723420800000,"y":7.909},{"Treasury.Bond":"T273_day","Auction.Date":"2024-08-19","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":6772,"Weighted.Average.Discount.Rate":7.952,"Weighted.Average.Effective.Yield":8.454670506999999,"Best.Allotted.Rate":7.862,"Worst.Allotted.Rate":8.055,"Worst.Bid.Rate":8.483000000000001,"Bid.to.Cover.Ratio":1.472173913,"x":1724025600000,"y":7.952},{"Treasury.Bond":"T273_day","Auction.Date":"2024-08-26","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":12126,"Weighted.Average.Discount.Rate":7.915,"Weighted.Average.Effective.Yield":8.412821799,"Best.Allotted.Rate":7.821,"Worst.Allotted.Rate":7.935,"Worst.Bid.Rate":8.122,"Bid.to.Cover.Ratio":2.636086957,"x":1724630400000,"y":7.915},{"Treasury.Bond":"T273_day","Auction.Date":"2024-09-02","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":8689,"Weighted.Average.Discount.Rate":7.946,"Weighted.Average.Effective.Yield":8.447934257,"Best.Allotted.Rate":7.755,"Worst.Allotted.Rate":7.982,"Worst.Bid.Rate":8.156000000000001,"Bid.to.Cover.Ratio":1.888913043,"x":1725235200000,"y":7.946},{"Treasury.Bond":"T273_day","Auction.Date":"2024-09-09","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":10813,"Weighted.Average.Discount.Rate":7.934,"Weighted.Average.Effective.Yield":8.434806112,"Best.Allotted.Rate":7.862,"Worst.Allotted.Rate":7.962,"Worst.Bid.Rate":8.156000000000001,"Bid.to.Cover.Ratio":2.350652174,"x":1725840000000,"y":7.934},{"Treasury.Bond":"T273_day","Auction.Date":"2024-09-16","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":10635,"Weighted.Average.Discount.Rate":7.903,"Weighted.Average.Effective.Yield":8.399068127,"Best.Allotted.Rate":7.862,"Worst.Allotted.Rate":7.948,"Worst.Bid.Rate":8.116,"Bid.to.Cover.Ratio":2.311956522,"x":1726444800000,"y":7.903},{"Treasury.Bond":"T273_day","Auction.Date":"2024-09-23","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":10196,"Weighted.Average.Discount.Rate":7.912,"Weighted.Average.Effective.Yield":8.40987636,"Best.Allotted.Rate":7.848,"Worst.Allotted.Rate":7.948,"Worst.Bid.Rate":8.089,"Bid.to.Cover.Ratio":2.216521739,"x":1727049600000,"y":7.912},{"Treasury.Bond":"T273_day","Auction.Date":"2024-09-30","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":10627,"Weighted.Average.Discount.Rate":7.872,"Weighted.Average.Effective.Yield":8.364994791000001,"Best.Allotted.Rate":7.835,"Worst.Allotted.Rate":7.888,"Worst.Bid.Rate":8.074999999999999,"Bid.to.Cover.Ratio":2.310217391,"x":1727654400000,"y":7.872},{"Treasury.Bond":"T273_day","Auction.Date":"2024-09-30","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":10627,"Weighted.Average.Discount.Rate":7.872,"Weighted.Average.Effective.Yield":8.364994791000001,"Best.Allotted.Rate":7.835,"Worst.Allotted.Rate":7.888,"Worst.Bid.Rate":8.074999999999999,"Bid.to.Cover.Ratio":2.310217391,"x":1727654400000,"y":7.872},{"Treasury.Bond":"T273_day","Auction.Date":"2024-09-30","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":10627,"Weighted.Average.Discount.Rate":7.872,"Weighted.Average.Effective.Yield":8.364994791000001,"Best.Allotted.Rate":7.835,"Worst.Allotted.Rate":7.888,"Worst.Bid.Rate":8.074999999999999,"Bid.to.Cover.Ratio":2.310217391,"x":1727654400000,"y":7.872},{"Treasury.Bond":"T273_day","Auction.Date":"2024-10-07","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":8488,"Weighted.Average.Discount.Rate":7.91,"Weighted.Average.Effective.Yield":8.407581874,"Best.Allotted.Rate":7.815,"Worst.Allotted.Rate":7.948,"Worst.Bid.Rate":8.289,"Bid.to.Cover.Ratio":1.845217391,"x":1728259200000,"y":7.91},{"Treasury.Bond":"T273_day","Auction.Date":"2024-10-14","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":13587,"Weighted.Average.Discount.Rate":7.896,"Weighted.Average.Effective.Yield":8.391728178999999,"Best.Allotted.Rate":7.862,"Worst.Allotted.Rate":7.928,"Worst.Bid.Rate":8.156000000000001,"Bid.to.Cover.Ratio":2.953695652,"x":1728864000000,"y":7.896},{"Treasury.Bond":"T273_day","Auction.Date":"2024-10-21","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":13135,"Weighted.Average.Discount.Rate":7.882,"Weighted.Average.Effective.Yield":8.375489095000001,"Best.Allotted.Rate":7.815,"Worst.Allotted.Rate":7.908,"Worst.Bid.Rate":8.129,"Bid.to.Cover.Ratio":2.855434783,"x":1729468800000,"y":7.882},{"Treasury.Bond":"T273_day","Auction.Date":"2024-10-28","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":14262,"Weighted.Average.Discount.Rate":7.866,"Weighted.Average.Effective.Yield":8.35753105,"Best.Allotted.Rate":7.808,"Worst.Allotted.Rate":7.895,"Worst.Bid.Rate":8.129,"Bid.to.Cover.Ratio":3.100434783,"x":1730073600000,"y":7.866},{"Treasury.Bond":"T273_day","Auction.Date":"2024-11-04","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":8947,"Weighted.Average.Discount.Rate":7.862,"Weighted.Average.Effective.Yield":8.353258180999999,"Best.Allotted.Rate":7.808,"Worst.Allotted.Rate":7.895,"Worst.Bid.Rate":8.102,"Bid.to.Cover.Ratio":1.945,"x":1730678400000,"y":7.862},{"Treasury.Bond":"T273_day","Auction.Date":"2024-11-11","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":7008,"Weighted.Average.Discount.Rate":7.866,"Weighted.Average.Effective.Yield":8.357326793,"Best.Allotted.Rate":7.775,"Worst.Allotted.Rate":7.908,"Worst.Bid.Rate":8.102,"Bid.to.Cover.Ratio":1.523478261,"x":1731283200000,"y":7.866},{"Treasury.Bond":"T273_day","Auction.Date":"2024-11-18","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":7936,"Weighted.Average.Discount.Rate":7.868,"Weighted.Average.Effective.Yield":8.360168397000001,"Best.Allotted.Rate":7.714,"Worst.Allotted.Rate":7.902,"Worst.Bid.Rate":8.048999999999999,"Bid.to.Cover.Ratio":1.725217391,"x":1731888000000,"y":7.868},{"Treasury.Bond":"T273_day","Auction.Date":"2024-11-25","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":12850,"Weighted.Average.Discount.Rate":7.772,"Weighted.Average.Effective.Yield":8.251577626,"Best.Allotted.Rate":7.701,"Worst.Allotted.Rate":7.821,"Worst.Bid.Rate":7.955,"Bid.to.Cover.Ratio":2.793478261,"x":1732492800000,"y":7.772},{"Treasury.Bond":"T273_day","Auction.Date":"2024-12-02","Amount.on.Offer":4600,"Total.Amount.Allocated":4263,"Total.Amount.of.Bids.Received":4263,"Weighted.Average.Discount.Rate":7.893,"Weighted.Average.Effective.Yield":8.387,"Best.Allotted.Rate":7.728,"Worst.Allotted.Rate":8.002000000000001,"Worst.Bid.Rate":8.002000000000001,"Bid.to.Cover.Ratio":1,"x":1733097600000,"y":7.893},{"Treasury.Bond":"T273_day","Auction.Date":"2024-12-09","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":12322,"Weighted.Average.Discount.Rate":7.879,"Weighted.Average.Effective.Yield":8.372389988,"Best.Allotted.Rate":7.821,"Worst.Allotted.Rate":7.908,"Worst.Bid.Rate":8.416,"Bid.to.Cover.Ratio":2.678695652,"x":1733702400000,"y":7.879},{"Treasury.Bond":"T273_day","Auction.Date":"2024-12-13","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":13207,"Weighted.Average.Discount.Rate":7.832,"Weighted.Average.Effective.Yield":8.319574766000001,"Best.Allotted.Rate":7.795,"Worst.Allotted.Rate":7.862,"Worst.Bid.Rate":8.141999999999999,"Bid.to.Cover.Ratio":2.871086957,"x":1734048000000,"y":7.832},{"Treasury.Bond":"T273_day","Auction.Date":"2024-12-23","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":11997,"Weighted.Average.Discount.Rate":7.858,"Weighted.Average.Effective.Yield":8.348681518999999,"Best.Allotted.Rate":7.817,"Worst.Allotted.Rate":7.89,"Worst.Bid.Rate":8.145,"Bid.to.Cover.Ratio":2.608043478,"x":1734912000000,"y":7.858},{"Treasury.Bond":"T273_day","Auction.Date":"2024-12-30","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":11680,"Weighted.Average.Discount.Rate":7.873,"Weighted.Average.Effective.Yield":8.365615332999999,"Best.Allotted.Rate":7.783,"Worst.Allotted.Rate":7.89,"Worst.Bid.Rate":8.145,"Bid.to.Cover.Ratio":2.539130435,"x":1735516800000,"y":7.873},{"Treasury.Bond":"T273_day","Auction.Date":"2025-01-06","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":12370,"Weighted.Average.Discount.Rate":7.84,"Weighted.Average.Effective.Yield":8.328366271,"Best.Allotted.Rate":7.741,"Worst.Allotted.Rate":7.862,"Worst.Bid.Rate":8.141999999999999,"Bid.to.Cover.Ratio":2.689130435,"x":1736121600000,"y":7.84},{"Treasury.Bond":"T273_day","Auction.Date":"2025-01-13","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":9422,"Weighted.Average.Discount.Rate":7.852,"Weighted.Average.Effective.Yield":8.341909124000001,"Best.Allotted.Rate":7.808,"Worst.Allotted.Rate":7.888,"Worst.Bid.Rate":8.102,"Bid.to.Cover.Ratio":2.04826087,"x":1736726400000,"y":7.852},{"Treasury.Bond":"T273_day","Auction.Date":"2025-01-20","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":10654,"Weighted.Average.Discount.Rate":7.83,"Weighted.Average.Effective.Yield":8.317082533000001,"Best.Allotted.Rate":7.795,"Worst.Allotted.Rate":7.848,"Worst.Bid.Rate":8.102,"Bid.to.Cover.Ratio":2.316086957,"x":1737331200000,"y":7.83},{"Treasury.Bond":"T273_day","Auction.Date":"2025-01-27","Amount.on.Offer":4600,"Total.Amount.Allocated":4600,"Total.Amount.of.Bids.Received":13785,"Weighted.Average.Discount.Rate":7.778,"Weighted.Average.Effective.Yield":8.258435984,"Best.Allotted.Rate":7.728,"Worst.Allotted.Rate":7.808,"Worst.Bid.Rate":8.015000000000001,"Bid.to.Cover.Ratio":2.99673913,"x":1737936000000,"y":7.778}],"type":"line","name":"T273 Discount Rate"},{"group":"group","data":[{"Treasury.Bond":"T364_day","Auction.Date":"2024-01-08","Amount.on.Offer":5100,"Total.Amount.Allocated":5100,"Total.Amount.of.Bids.Received":15397,"Weighted.Average.Discount.Rate":8.372,"Weighted.Average.Effective.Yield":9.134071485,"Best.Allotted.Rate":8.308,"Worst.Allotted.Rate":8.407999999999999,"Worst.Bid.Rate":8.704000000000001,"Bid.to.Cover.Ratio":3.019019608,"x":1704672000000,"y":8.372},{"Treasury.Bond":"T364_day","Auction.Date":"2024-01-15","Amount.on.Offer":5100,"Total.Amount.Allocated":5100,"Total.Amount.of.Bids.Received":14141,"Weighted.Average.Discount.Rate":8.327,"Weighted.Average.Effective.Yield":9.08,"Best.Allotted.Rate":8.303000000000001,"Worst.Allotted.Rate":8.343,"Worst.Bid.Rate":8.704000000000001,"Bid.to.Cover.Ratio":2.772745098,"x":1705276800000,"y":8.327},{"Treasury.Bond":"T364_day","Auction.Date":"2024-01-22","Amount.on.Offer":5100,"Total.Amount.Allocated":5100,"Total.Amount.of.Bids.Received":15873,"Weighted.Average.Discount.Rate":8.303000000000001,"Weighted.Average.Effective.Yield":9.050000000000001,"Best.Allotted.Rate":8.257999999999999,"Worst.Allotted.Rate":8.323,"Worst.Bid.Rate":8.704000000000001,"Bid.to.Cover.Ratio":3.112352941,"x":1705881600000,"y":8.303000000000001},{"Treasury.Bond":"T364_day","Auction.Date":"2024-01-29","Amount.on.Offer":5100,"Total.Amount.Allocated":5100,"Total.Amount.of.Bids.Received":16281,"Weighted.Average.Discount.Rate":8.257999999999999,"Weighted.Average.Effective.Yield":9,"Best.Allotted.Rate":8.218,"Worst.Allotted.Rate":8.273,"Worst.Bid.Rate":8.704000000000001,"Bid.to.Cover.Ratio":3.192352941,"x":1706486400000,"y":8.257999999999999},{"Treasury.Bond":"T364_day","Auction.Date":"2024-02-05","Amount.on.Offer":3800,"Total.Amount.Allocated":3800,"Total.Amount.of.Bids.Received":10736,"Weighted.Average.Discount.Rate":8.243,"Weighted.Average.Effective.Yield":8.98,"Best.Allotted.Rate":8.212999999999999,"Worst.Allotted.Rate":8.268000000000001,"Worst.Bid.Rate":8.638999999999999,"Bid.to.Cover.Ratio":2.825263158,"x":1707091200000,"y":8.243},{"Treasury.Bond":"T364_day","Auction.Date":"2024-02-12","Amount.on.Offer":3800,"Total.Amount.Allocated":3800,"Total.Amount.of.Bids.Received":13653,"Weighted.Average.Discount.Rate":8.222,"Weighted.Average.Effective.Yield":8.960000000000001,"Best.Allotted.Rate":8.218,"Worst.Allotted.Rate":8.233000000000001,"Worst.Bid.Rate":8.638999999999999,"Bid.to.Cover.Ratio":3.592894737,"x":1707696000000,"y":8.222},{"Treasury.Bond":"T364_day","Auction.Date":"2024-02-19","Amount.on.Offer":3800,"Total.Amount.Allocated":3800,"Total.Amount.of.Bids.Received":7497,"Weighted.Average.Discount.Rate":8.222,"Weighted.Average.Effective.Yield":8.960000000000001,"Best.Allotted.Rate":8.172000000000001,"Worst.Allotted.Rate":8.308,"Worst.Bid.Rate":8.638999999999999,"Bid.to.Cover.Ratio":1.972894737,"x":1708300800000,"y":8.222},{"Treasury.Bond":"T364_day","Auction.Date":"2024-02-26","Amount.on.Offer":3800,"Total.Amount.Allocated":3800,"Total.Amount.of.Bids.Received":15050,"Weighted.Average.Discount.Rate":8.186999999999999,"Weighted.Average.Effective.Yield":8.91,"Best.Allotted.Rate":8.172000000000001,"Worst.Allotted.Rate":8.192,"Worst.Bid.Rate":8.638999999999999,"Bid.to.Cover.Ratio":3.960526316,"x":1708905600000,"y":8.186999999999999},{"Treasury.Bond":"T364_day","Auction.Date":"2024-03-04","Amount.on.Offer":3800,"Total.Amount.Allocated":3800,"Total.Amount.of.Bids.Received":10147,"Weighted.Average.Discount.Rate":8.161,"Weighted.Average.Effective.Yield":8.880000000000001,"Best.Allotted.Rate":8.132,"Worst.Allotted.Rate":8.177,"Worst.Bid.Rate":8.633900000000001,"Bid.to.Cover.Ratio":2.670263158,"x":1709510400000,"y":8.161},{"Treasury.Bond":"T364_day","Auction.Date":"2024-03-11","Amount.on.Offer":3800,"Total.Amount.Allocated":3800,"Total.Amount.of.Bids.Received":16681,"Weighted.Average.Discount.Rate":8.111000000000001,"Weighted.Average.Effective.Yield":8.82,"Best.Allotted.Rate":8.092000000000001,"Worst.Allotted.Rate":8.122,"Worst.Bid.Rate":8.638999999999999,"Bid.to.Cover.Ratio":4.389736842,"x":1710115200000,"y":8.111000000000001},{"Treasury.Bond":"T364_day","Auction.Date":"2024-03-18","Amount.on.Offer":3800,"Total.Amount.Allocated":3800,"Total.Amount.of.Bids.Received":17114,"Weighted.Average.Discount.Rate":8.068,"Weighted.Average.Effective.Yield":8.77,"Best.Allotted.Rate":8.047000000000001,"Worst.Allotted.Rate":8.092000000000001,"Worst.Bid.Rate":8.638999999999999,"Bid.to.Cover.Ratio":4.503684211,"x":1710720000000,"y":8.068},{"Treasury.Bond":"T364_day","Auction.Date":"2024-03-25","Amount.on.Offer":3800,"Total.Amount.Allocated":3800,"Total.Amount.of.Bids.Received":11767,"Weighted.Average.Discount.Rate":8.01,"Weighted.Average.Effective.Yield":8.699999999999999,"Best.Allotted.Rate":7.972,"Worst.Allotted.Rate":8.026999999999999,"Worst.Bid.Rate":8.638999999999999,"Bid.to.Cover.Ratio":3.096578947,"x":1711324800000,"y":8.01},{"Treasury.Bond":"T364_day","Auction.Date":"2024-03-28","Amount.on.Offer":4900,"Total.Amount.Allocated":5555,"Total.Amount.of.Bids.Received":10674,"Weighted.Average.Discount.Rate":7.988,"Weighted.Average.Effective.Yield":8.68,"Best.Allotted.Rate":7.962,"Worst.Allotted.Rate":8.022,"Worst.Bid.Rate":8.609,"Bid.to.Cover.Ratio":1.921512151,"x":1711584000000,"y":7.988},{"Treasury.Bond":"T364_day","Auction.Date":"2024-04-08","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":5755,"Weighted.Average.Discount.Rate":8.08,"Weighted.Average.Effective.Yield":8.791802742,"Best.Allotted.Rate":7.95,"Worst.Allotted.Rate":8.32,"Worst.Bid.Rate":8.59,"Bid.to.Cover.Ratio":1.174489796,"x":1712534400000,"y":8.08},{"Treasury.Bond":"T364_day","Auction.Date":"2024-04-15","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":7649,"Weighted.Average.Discount.Rate":8.242000000000001,"Weighted.Average.Effective.Yield":8.979671491,"Best.Allotted.Rate":8.067,"Worst.Allotted.Rate":8.403,"Worst.Bid.Rate":8.739000000000001,"Bid.to.Cover.Ratio":1.561020408,"x":1713139200000,"y":8.242000000000001},{"Treasury.Bond":"T364_day","Auction.Date":"2024-04-22","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":10087,"Weighted.Average.Discount.Rate":8.303000000000001,"Weighted.Average.Effective.Yield":9.052418131,"Best.Allotted.Rate":8.207000000000001,"Worst.Allotted.Rate":8.428000000000001,"Worst.Bid.Rate":8.699,"Bid.to.Cover.Ratio":2.058571429,"x":1713744000000,"y":8.303000000000001},{"Treasury.Bond":"T364_day","Auction.Date":"2024-04-29","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":9614,"Weighted.Average.Discount.Rate":8.356999999999999,"Weighted.Average.Effective.Yield":9.114452829999999,"Best.Allotted.Rate":8.305999999999999,"Worst.Allotted.Rate":8.430999999999999,"Worst.Bid.Rate":8.698,"Bid.to.Cover.Ratio":1.962040816,"x":1714348800000,"y":8.356999999999999},{"Treasury.Bond":"T364_day","Auction.Date":"2024-05-06","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":6638,"Weighted.Average.Discount.Rate":8.398,"Weighted.Average.Effective.Yield":9.165089008000001,"Best.Allotted.Rate":8.278,"Worst.Allotted.Rate":8.497999999999999,"Worst.Bid.Rate":8.699,"Bid.to.Cover.Ratio":1.354693878,"x":1714953600000,"y":8.398},{"Treasury.Bond":"T364_day","Auction.Date":"2024-05-13","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":8284,"Weighted.Average.Discount.Rate":8.44,"Weighted.Average.Effective.Yield":9.216025937,"Best.Allotted.Rate":8.343,"Worst.Allotted.Rate":8.493,"Worst.Bid.Rate":8.699,"Bid.to.Cover.Ratio":1.690612245,"x":1715558400000,"y":8.44},{"Treasury.Bond":"T364_day","Auction.Date":"2024-05-20","Amount.on.Offer":4900,"Total.Amount.Allocated":7947,"Total.Amount.of.Bids.Received":16349,"Weighted.Average.Discount.Rate":8.393000000000001,"Weighted.Average.Effective.Yield":9.160076814,"Best.Allotted.Rate":8.363,"Worst.Allotted.Rate":8.417999999999999,"Worst.Bid.Rate":8.609,"Bid.to.Cover.Ratio":2.05725431,"x":1716163200000,"y":8.393000000000001},{"Treasury.Bond":"T364_day","Auction.Date":"2024-05-27","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":7116,"Weighted.Average.Discount.Rate":8.414,"Weighted.Average.Effective.Yield":9.182878865999999,"Best.Allotted.Rate":8.331,"Worst.Allotted.Rate":8.522,"Worst.Bid.Rate":8.698,"Bid.to.Cover.Ratio":1.452244898,"x":1716768000000,"y":8.414},{"Treasury.Bond":"T364_day","Auction.Date":"2024-06-03","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":12010,"Weighted.Average.Discount.Rate":8.433,"Weighted.Average.Effective.Yield":9.207858570000001,"Best.Allotted.Rate":8.363,"Worst.Allotted.Rate":8.497999999999999,"Worst.Bid.Rate":8.763999999999999,"Bid.to.Cover.Ratio":2.451020408,"x":1717372800000,"y":8.433},{"Treasury.Bond":"T364_day","Auction.Date":"2024-06-10","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":11399,"Weighted.Average.Discount.Rate":8.426,"Weighted.Average.Effective.Yield":9.198783591,"Best.Allotted.Rate":8.368,"Worst.Allotted.Rate":8.462999999999999,"Worst.Bid.Rate":8.759,"Bid.to.Cover.Ratio":2.326326531,"x":1717977600000,"y":8.426},{"Treasury.Bond":"T364_day","Auction.Date":"2024-06-14","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":15528,"Weighted.Average.Discount.Rate":8.390000000000001,"Weighted.Average.Effective.Yield":9.156505232000001,"Best.Allotted.Rate":8.323,"Worst.Allotted.Rate":8.417999999999999,"Worst.Bid.Rate":8.648999999999999,"Bid.to.Cover.Ratio":3.168979592,"x":1718323200000,"y":8.390000000000001},{"Treasury.Bond":"T364_day","Auction.Date":"2024-06-24","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":15595,"Weighted.Average.Discount.Rate":8.281000000000001,"Weighted.Average.Effective.Yield":9.026,"Best.Allotted.Rate":8.243,"Worst.Allotted.Rate":8.303000000000001,"Worst.Bid.Rate":8.603999999999999,"Bid.to.Cover.Ratio":3.182653061,"x":1719187200000,"y":8.281000000000001},{"Treasury.Bond":"T364_day","Auction.Date":"2024-07-01","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":11268,"Weighted.Average.Discount.Rate":8.256,"Weighted.Average.Effective.Yield":8.996285191,"Best.Allotted.Rate":8.172000000000001,"Worst.Allotted.Rate":8.268000000000001,"Worst.Bid.Rate":8.548,"Bid.to.Cover.Ratio":2.299591837,"x":1719792000000,"y":8.256},{"Treasury.Bond":"T364_day","Auction.Date":"2024-07-08","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":19531,"Weighted.Average.Discount.Rate":8.194000000000001,"Weighted.Average.Effective.Yield":8.923080224,"Best.Allotted.Rate":8.132,"Worst.Allotted.Rate":8.233000000000001,"Worst.Bid.Rate":8.513,"Bid.to.Cover.Ratio":3.985918367,"x":1720396800000,"y":8.194000000000001},{"Treasury.Bond":"T364_day","Auction.Date":"2024-07-15","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":20884,"Weighted.Average.Discount.Rate":8.077999999999999,"Weighted.Average.Effective.Yield":8.786156044,"Best.Allotted.Rate":8.022,"Worst.Allotted.Rate":8.106999999999999,"Worst.Bid.Rate":8.448,"Bid.to.Cover.Ratio":4.262040816,"x":1721001600000,"y":8.077999999999999},{"Treasury.Bond":"T364_day","Auction.Date":"2024-07-22","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":13628,"Weighted.Average.Discount.Rate":8.051,"Weighted.Average.Effective.Yield":8.75,"Best.Allotted.Rate":7.922,"Worst.Allotted.Rate":8.082000000000001,"Worst.Bid.Rate":8.448,"Bid.to.Cover.Ratio":2.78122449,"x":1721606400000,"y":8.051},{"Treasury.Bond":"T364_day","Auction.Date":"2024-07-29","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":18005,"Weighted.Average.Discount.Rate":7.969,"Weighted.Average.Effective.Yield":8.657,"Best.Allotted.Rate":7.912,"Worst.Allotted.Rate":8.007,"Worst.Bid.Rate":8.353,"Bid.to.Cover.Ratio":3.674489796,"x":1722211200000,"y":7.969},{"Treasury.Bond":"T364_day","Auction.Date":"2024-08-05","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":18757,"Weighted.Average.Discount.Rate":7.849,"Weighted.Average.Effective.Yield":8.515258450999999,"Best.Allotted.Rate":7.811,"Worst.Allotted.Rate":7.877,"Worst.Bid.Rate":8.353,"Bid.to.Cover.Ratio":3.827959184,"x":1722816000000,"y":7.849},{"Treasury.Bond":"T364_day","Auction.Date":"2024-08-12","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":16082,"Weighted.Average.Discount.Rate":7.727,"Weighted.Average.Effective.Yield":8.371838583000001,"Best.Allotted.Rate":7.621,"Worst.Allotted.Rate":7.836,"Worst.Bid.Rate":8.353,"Bid.to.Cover.Ratio":3.282040816,"x":1723420800000,"y":7.727},{"Treasury.Bond":"T364_day","Auction.Date":"2024-08-19","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":10602,"Weighted.Average.Discount.Rate":7.704,"Weighted.Average.Effective.Yield":8.345604758,"Best.Allotted.Rate":7.641,"Worst.Allotted.Rate":7.751,"Worst.Bid.Rate":8.353,"Bid.to.Cover.Ratio":2.163673469,"x":1724025600000,"y":7.704},{"Treasury.Bond":"T364_day","Auction.Date":"2024-08-26","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":11350,"Weighted.Average.Discount.Rate":7.666,"Weighted.Average.Effective.Yield":8.300353206,"Best.Allotted.Rate":7.616,"Worst.Allotted.Rate":7.701,"Worst.Bid.Rate":7.917,"Bid.to.Cover.Ratio":2.316326531,"x":1724630400000,"y":7.666},{"Treasury.Bond":"T364_day","Auction.Date":"2024-09-02","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":8461,"Weighted.Average.Discount.Rate":7.656,"Weighted.Average.Effective.Yield":8.289279396,"Best.Allotted.Rate":7.591,"Worst.Allotted.Rate":7.731,"Worst.Bid.Rate":7.962,"Bid.to.Cover.Ratio":1.726734694,"x":1725235200000,"y":7.656},{"Treasury.Bond":"T364_day","Auction.Date":"2024-09-09","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":12176,"Weighted.Average.Discount.Rate":7.62,"Weighted.Average.Effective.Yield":8.24624245,"Best.Allotted.Rate":7.541,"Worst.Allotted.Rate":7.676,"Worst.Bid.Rate":8.071999999999999,"Bid.to.Cover.Ratio":2.484897959,"x":1725840000000,"y":7.62},{"Treasury.Bond":"T364_day","Auction.Date":"2024-09-16","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":7311,"Weighted.Average.Discount.Rate":7.619,"Weighted.Average.Effective.Yield":8.245472961000001,"Best.Allotted.Rate":7.571,"Worst.Allotted.Rate":7.691,"Worst.Bid.Rate":7.917,"Bid.to.Cover.Ratio":1.492040816,"x":1726444800000,"y":7.619},{"Treasury.Bond":"T364_day","Auction.Date":"2024-09-23","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":7551,"Weighted.Average.Discount.Rate":7.637,"Weighted.Average.Effective.Yield":8.267978552000001,"Best.Allotted.Rate":7.555,"Worst.Allotted.Rate":7.73,"Worst.Bid.Rate":7.9,"Bid.to.Cover.Ratio":1.541020408,"x":1727049600000,"y":7.637},{"Treasury.Bond":"T364_day","Auction.Date":"2024-09-30","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":6879,"Weighted.Average.Discount.Rate":7.669,"Weighted.Average.Effective.Yield":8.303836059,"Best.Allotted.Rate":7.556,"Worst.Allotted.Rate":7.771,"Worst.Bid.Rate":7.922,"Bid.to.Cover.Ratio":1.403877551,"x":1727654400000,"y":7.669},{"Treasury.Bond":"T364_day","Auction.Date":"2024-10-07","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":10236,"Weighted.Average.Discount.Rate":7.64,"Weighted.Average.Effective.Yield":8.269581367000001,"Best.Allotted.Rate":7.556,"Worst.Allotted.Rate":7.761,"Worst.Bid.Rate":8.223000000000001,"Bid.to.Cover.Ratio":2.088979592,"x":1728259200000,"y":7.64},{"Treasury.Bond":"T364_day","Auction.Date":"2024-10-14","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":10232,"Weighted.Average.Discount.Rate":7.636,"Weighted.Average.Effective.Yield":8.26,"Best.Allotted.Rate":7.581,"Worst.Allotted.Rate":7.741,"Worst.Bid.Rate":8.022,"Bid.to.Cover.Ratio":2.088163265,"x":1728864000000,"y":7.636},{"Treasury.Bond":"T364_day","Auction.Date":"2024-10-21","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":8166,"Weighted.Average.Discount.Rate":7.678,"Weighted.Average.Effective.Yield":8.314736532,"Best.Allotted.Rate":7.581,"Worst.Allotted.Rate":7.766,"Worst.Bid.Rate":7.972,"Bid.to.Cover.Ratio":1.666530612,"x":1729468800000,"y":7.678},{"Treasury.Bond":"T364_day","Auction.Date":"2024-10-28","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":14765,"Weighted.Average.Discount.Rate":7.659,"Weighted.Average.Effective.Yield":8.292918414000001,"Best.Allotted.Rate":7.621,"Worst.Allotted.Rate":7.691,"Worst.Bid.Rate":8.071999999999999,"Bid.to.Cover.Ratio":3.013265306,"x":1730073600000,"y":7.659},{"Treasury.Bond":"T364_day","Auction.Date":"2024-11-04","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":8966,"Weighted.Average.Discount.Rate":7.669,"Weighted.Average.Effective.Yield":8.303611392000001,"Best.Allotted.Rate":7.621,"Worst.Allotted.Rate":7.701,"Worst.Bid.Rate":8.022,"Bid.to.Cover.Ratio":1.829795918,"x":1730678400000,"y":7.669},{"Treasury.Bond":"T364_day","Auction.Date":"2024-11-11","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":6550,"Weighted.Average.Discount.Rate":7.689,"Weighted.Average.Effective.Yield":8.328046165,"Best.Allotted.Rate":7.556,"Worst.Allotted.Rate":7.811,"Worst.Bid.Rate":7.932,"Bid.to.Cover.Ratio":1.336734694,"x":1731283200000,"y":7.689},{"Treasury.Bond":"T364_day","Auction.Date":"2024-11-18","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":8665,"Weighted.Average.Discount.Rate":7.697,"Weighted.Average.Effective.Yield":8.337346002,"Best.Allotted.Rate":7.611,"Worst.Allotted.Rate":7.786,"Worst.Bid.Rate":7.907,"Bid.to.Cover.Ratio":1.768367347,"x":1731888000000,"y":7.697},{"Treasury.Bond":"T364_day","Auction.Date":"2024-11-25","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":6560,"Weighted.Average.Discount.Rate":7.693,"Weighted.Average.Effective.Yield":8.332812485,"Best.Allotted.Rate":7.581,"Worst.Allotted.Rate":7.781,"Worst.Bid.Rate":7.882,"Bid.to.Cover.Ratio":1.33877551,"x":1732492800000,"y":7.693},{"Treasury.Bond":"T364_day","Auction.Date":"2024-12-02","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":5670,"Weighted.Average.Discount.Rate":7.749,"Weighted.Average.Effective.Yield":8.398,"Best.Allotted.Rate":7.571,"Worst.Allotted.Rate":7.821,"Worst.Bid.Rate":7.897,"Bid.to.Cover.Ratio":1.157142857,"x":1733097600000,"y":7.749},{"Treasury.Bond":"T364_day","Auction.Date":"2024-12-09","Amount.on.Offer":4900,"Total.Amount.Allocated":5022,"Total.Amount.of.Bids.Received":13854,"Weighted.Average.Discount.Rate":7.725,"Weighted.Average.Effective.Yield":8.369795269000001,"Best.Allotted.Rate":7.706,"Worst.Allotted.Rate":7.726,"Worst.Bid.Rate":8.268000000000001,"Bid.to.Cover.Ratio":2.758661888,"x":1733702400000,"y":7.725},{"Treasury.Bond":"T364_day","Auction.Date":"2024-12-13","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":12616,"Weighted.Average.Discount.Rate":7.672,"Weighted.Average.Effective.Yield":8.307590727999999,"Best.Allotted.Rate":7.631,"Worst.Allotted.Rate":7.691,"Worst.Bid.Rate":7.932,"Bid.to.Cover.Ratio":2.574693878,"x":1734048000000,"y":7.672},{"Treasury.Bond":"T364_day","Auction.Date":"2024-12-23","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":11350,"Weighted.Average.Discount.Rate":7.699,"Weighted.Average.Effective.Yield":8.339282329,"Best.Allotted.Rate":7.628,"Worst.Allotted.Rate":7.749,"Worst.Bid.Rate":7.986,"Bid.to.Cover.Ratio":2.316326531,"x":1734912000000,"y":7.699},{"Treasury.Bond":"T364_day","Auction.Date":"2024-12-30","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":7437,"Weighted.Average.Discount.Rate":7.768,"Weighted.Average.Effective.Yield":8.420296618,"Best.Allotted.Rate":7.652,"Worst.Allotted.Rate":7.818,"Worst.Bid.Rate":7.944,"Bid.to.Cover.Ratio":1.517755102,"x":1735516800000,"y":7.768},{"Treasury.Bond":"T364_day","Auction.Date":"2025-01-06","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":12740,"Weighted.Average.Discount.Rate":7.746,"Weighted.Average.Effective.Yield":8.394452854000001,"Best.Allotted.Rate":7.631,"Worst.Allotted.Rate":7.766,"Worst.Bid.Rate":7.972,"Bid.to.Cover.Ratio":2.6,"x":1736121600000,"y":7.746},{"Treasury.Bond":"T364_day","Auction.Date":"2025-01-13","Amount.on.Offer":4900,"Total.Amount.Allocated":6005,"Total.Amount.of.Bids.Received":18413,"Weighted.Average.Discount.Rate":7.707,"Weighted.Average.Effective.Yield":8.3486691,"Best.Allotted.Rate":7.666,"Worst.Allotted.Rate":7.726,"Worst.Bid.Rate":8.022,"Bid.to.Cover.Ratio":3.066278102,"x":1736726400000,"y":7.707},{"Treasury.Bond":"T364_day","Auction.Date":"2025-01-20","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":13800,"Weighted.Average.Discount.Rate":7.677,"Weighted.Average.Effective.Yield":8.313477070999999,"Best.Allotted.Rate":7.646,"Worst.Allotted.Rate":7.691,"Worst.Bid.Rate":7.992,"Bid.to.Cover.Ratio":2.816326531,"x":1737331200000,"y":7.677},{"Treasury.Bond":"T364_day","Auction.Date":"2025-01-27","Amount.on.Offer":4900,"Total.Amount.Allocated":4900,"Total.Amount.of.Bids.Received":15017,"Weighted.Average.Discount.Rate":7.617,"Weighted.Average.Effective.Yield":8.243161379,"Best.Allotted.Rate":7.601,"Worst.Allotted.Rate":7.626,"Worst.Bid.Rate":7.887,"Bid.to.Cover.Ratio":3.064693878,"x":1737936000000,"y":7.617}],"type":"line","name":"T364 Discount Rate"}],"xAxis":{"type":"datetime","title":{"text":"Date"}},"tooltip":{"crosshairs":true,"shared":true},"rangeSelector":{"enabled":true}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

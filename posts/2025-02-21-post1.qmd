@@ -1,0 +1,24 @@
+---
+title: "Yield Report 21/02/2025"
+author: "Kudzanai Tsunga"
+date: 2025-02-21
+categories: ["Bonds", "Treasury Bill", "Returns", "Yields"]
+image: "image2.png"
+self-contained: false
+---
+
+This week saw divergent trends in South African bond yields, with higher-yielding instruments experiencing modest declines, while lower-yielding bonds saw mixed movements. The R_186 bond, a key benchmark, remained stable at 8.34%, reflecting limited movement in shorter-term sovereign yields. However, some long-dated instruments such as R_2048 (-0.61%) and R_2053 (-0.53%) saw notable decreases, possibly indicating increased demand for longer-duration assets.
+
+![](image2.png)
+
+Most Volatile Instruments:
+
+Short-term treasury bills (SATB3M, SATB6M, SATB9M) were the most volatile this week, with yields dropping sharply by 4.17%, 3.83%, and 1.68%, respectively. The repo rate fell significantly (-3.23%), hinting at expectations of potential easing in borrowing costs. These movements suggest that investors are positioning for a lower interest rate environment.
+
+Contrasting Yield Movements:
+
+Lower-yielding bonds, such as R_2023 (7.55%), saw limited movement, while higher-yielding long-dated bonds like R_214 (11.18%) experienced more pronounced shifts. The ZAR Government Bonds (ZARGB) series also saw yield declines, reinforcing a possible market rebalancing toward risk-adjusted returns.
+
+------------------------------------------------------------------------
+
+*For additional visual insights, explore the dashboard*
